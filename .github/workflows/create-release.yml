@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-  
+  workflow_dispatch:
 jobs:
   Release-Windows:
     name: Creating a Release on Github
