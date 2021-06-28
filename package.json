@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "electron-builder -w",
     "start": "electron src"
   },
   "repository": {
@@ -19,9 +20,27 @@
   },
   "homepage": "https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer#readme",
   "devDependencies": {
-    "electron": "^13.1.4"
+    "electron": "^13.1.4",
+    "electron-builder": "^22.11.7"
   },
   "dependencies": {
     "mkdirp": "^1.0.4"
+  },
+  "build": {
+    "appId": "jamiephan.TryMode20.Installer",
+    "productName": "Try Mode 2.0 Installer",
+    "win": {
+      "target": [
+        {
+          "target": "nsis"
+        },
+        {
+          "target": "zip"
+        },
+        {
+          "target": "portable"
+        }
+      ]
+    }
   }
 }
