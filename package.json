@@ -20,5 +20,8 @@
   "homepage": "https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer#readme",
   "devDependencies": {
     "electron": "^13.1.4"
+  },
+  "dependencies": {
+    "mkdirp": "^1.0.4"
   }
 }

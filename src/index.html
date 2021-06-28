@@ -4,17 +4,57 @@
 <head>
   <meta charset="UTF-8">
   <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-  <title>Hello World!</title>
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' github.com *.github.com; script-src 'self' github.com *.github.com; img-src 'self' github.com *.github.com"> -->
+  <!-- <meta http-equiv="X-Content-Security-Policy" content="default-src 'self' github.com *.github.com; script-src 'self' github.com *.github.com; img-src 'self' github.com *.github.com"> -->
+  <title>Heroes of the Storm - Try Mode 2.0 Installer</title>
+  <link rel="stylesheet" href="style.css">
   <script src="./renderer.js"></script>
 </head>
 
 <body>
-  <h1>Hello World!</h1>
-  We are using Node.js <span id="node-version"></span>,
-  Chromium <span id="chrome-version"></span>,
-  and Electron <span id="electron-version"></span>.
+  <h1>Heroes of the Storm - Try Mode 2.0 Installer</h1>
+  <h2>Settings</h2>
+  <hr>
+  <ul>
+    <li>Heroes Path: <span id="heroespath" style="font-weight: bold;">None</span> <button
+        id="settings-heroespath">Change</button></li>
+  </ul>
+  <hr>
+  <h2>Installed:</h2>
+  (Remove = Create a backup of the existing map, Delete = completely delete the existing map)
+  <p>
+    <button id="reloadinstalledmap">Refresh</button>
+  </p>
+  <ul id="installedList">
+  </ul>
+  <hr>
+  <h2>Download:</h2>
+  <p>
+    Maps are downloaded from <a href="https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/releases/latest"
+      target="_blank">HeroesOfTheStorm_TryMode2.0</a> repo.
+  </p>
+  <p>
+    <button id="reloaddownloadmap">Refresh</button>
+  </p>
+  <table id="downloadmap" class="faded">
+    <thead>
+      <tr>
+        <th colspan="5" id="commitheader"></th>
+      </tr>
+      <tr>
+        <th>File</th>
+        <th>Try Mode</th>
+        <th>Tutorial: Beginner</th>
+        <th>Tutorial: Map Mechanics</th>
+        <th>Tutorial: Veteran</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+
+
 </body>
 
 </html>
