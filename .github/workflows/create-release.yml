@@ -2,7 +2,8 @@ name: create-release
 on:
   push:
     branches:
-      - master
+      - main
+  
 jobs:
   Release-Windows:
     name: Creating a Release on Github
