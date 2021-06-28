@@ -1,0 +1,24 @@
+{
+  "name": "HeroesOfTheStorm_TryMode2.0Installer",
+  "version": "1.0.0",
+  "description": "Installer for Heroes of the Storm - Try Mode 2.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer.git"
+  },
+  "keywords": [],
+  "author": "Jamie Phan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/issues"
+  },
+  "homepage": "https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer#readme",
+  "devDependencies": {
+    "electron": "^13.1.4"
+  }
+}
