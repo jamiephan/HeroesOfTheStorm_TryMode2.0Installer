@@ -24,7 +24,7 @@ jobs:
       - name: Create Github Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: release-${{ github.event.head_commit.id }}
+          tag_name: release
           name: ${{ github.event.head_commit.message }}
           body: |
             Commit Message: `${{ github.event.head_commit.message }}`
