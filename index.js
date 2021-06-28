@@ -81,7 +81,7 @@ const createWindow = () => {
 
   ipcMain.on("applyOnlineMap", (event, args) => {
     // Ask once
-    const { data: mapBinary, type, name, id } = args
+    const { data: mapBinary, type} = args
 
     if (!heroesInstallationPath) {
       let result = promptHeroesInstallation()

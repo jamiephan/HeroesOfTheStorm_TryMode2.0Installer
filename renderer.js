@@ -38,7 +38,6 @@ const populateOnlineMaps = () => {
           typeBtn.dataset.link = link
           typeBtn.dataset.type = type
           typeBtn.dataset.name = mapName
-          typeBtn.dataset.id = mapId
           typeBtn.addEventListener("click", e => {
             applyOnlineMap(e.target.dataset)
           }, false)
@@ -102,24 +101,24 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // Apply button clicked
 const applyOnlineMap = (data) => {
-  const { link, type, name, id } = data
-  // alert(id)
-
-  fetch(link)
-    .then(d => d.arrayBuffer())
-    .then(d => {
-      if (confirm("Apply map to " + type + "? (This will override existing map)")) {
-        const result = ipcRenderer.sendSync('applyOnlineMap', { data: d, type, name, id })
-        if (!result.error) {
-          alert(`Applied ${name} to ${type}. Try launch it in the game!`)
-          populateInstalledMaps()
-          updateSettings()
-        } else {
-          alert(`Error when applied the map. ${result.msg}`)
-        }
-      }
-    })
-  alert("Downloading " + name)
+  const { link, type, name } = data
+  if (confirm("Apply map to " + config.heroes.mapsPath[type].name + "? (This will override existing map)")) {
+    fetch(link)
+      .then(d => d.arrayBuffer())
+      .then(d => {
+          const result = ipcRenderer.sendSync('applyOnlineMap', { data: d, type, name })
+          if (!result.error) {
+            alert(`Changed ${config.heroes.mapsPath[type].name} to ${name}. \n\nTry launch it in the game.`)
+            populateInstalledMaps()
+            updateSettings()
+          } else {
+            alert(`Error when applied the map. ${result.msg}`)
+          }
+      })
+      .catch(e => {
+        alert(e.message)
+      })
+  }
 
   // Dataset cannot be converted to IPC-able object
 }
