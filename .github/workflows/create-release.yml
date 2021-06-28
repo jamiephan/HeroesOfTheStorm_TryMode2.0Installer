@@ -15,7 +15,12 @@ jobs:
         run: |
           npm ci
           npm run build:windows
-
+      - name: Delete Older Releases
+        uses: dev-drprasad/delete-older-releases@v0.2.0
+        with:
+          keep_latest: 0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Github Release
         uses: softprops/action-gh-release@v1
         with:
@@ -31,11 +36,5 @@ jobs:
           files: |
             ./dist/*.exe
             ./dist/*.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Delete Older Releases
-        uses: dev-drprasad/delete-older-releases@v0.2.0
-        with:
-          keep_latest: 1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
