@@ -1,0 +1,35 @@
+name: create-release
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  Release-Windows:
+    name: Creating a Release on Github
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        run: |
+          npm ci
+          npm run build:windows
+
+      - name: Create Github Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: release-${{ github.event.head_commit.id }}
+          name: ${{ github.event.head_commit.message }}
+          body: |
+            Commit Message: `${{ github.event.head_commit.message }}`
+
+            Built time: `${{ github.event.head_commit.timestamp }}`
+
+          draft: false 
+          prerelease: false
+          files: |
+            ./dist/*.exe
+            ./dist/*.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
