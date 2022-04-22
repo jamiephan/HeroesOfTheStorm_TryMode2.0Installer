@@ -14,20 +14,6 @@
     "start:preload": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.preload.dev.ts",
     "start:renderer": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./.erb/configs/webpack.config.renderer.dev.ts"
   },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "cross-env NODE_ENV=development eslint --cache"
-    ],
-    "*.json,.{eslintrc,prettierrc}": [
-      "prettier --ignore-path .eslintignore --parser json --write"
-    ],
-    "*.{css,scss}": [
-      "prettier --ignore-path .eslintignore --single-quote --write"
-    ],
-    "*.{html,md,yml}": [
-      "prettier --ignore-path .eslintignore --single-quote --write"
-    ]
-  },
   "build": {
     "productName": "Try Mode 2.0 Installer",
     "appId": "net.jamiephan.heroes.trymode2.0.installer",
@@ -106,41 +92,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron-react-boilerplate/electron-react-boilerplate.git"
+    "url": "git+https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer.git"
   },
   "author": {
-    "name": "Electron React Boilerplate Maintainers",
-    "email": "electronreactboilerplate@gmail.com",
-    "url": "https://electron-react-boilerplate.js.org"
+    "name": "Jamie Phan",
+    "email": "me@jamiephan.net",
+    "url": "https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer"
   },
-  "contributors": [
-    {
-      "name": "Amila Welihinda",
-      "email": "amilajack@gmail.com",
-      "url": "https://github.com/amilajack"
-    },
-    {
-      "name": "John Tran",
-      "email": "jptran318@gmail.com",
-      "url": "https://github.com/jooohhn"
-    }
-  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues"
+    "url": "https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/issues"
   },
   "keywords": [
-    "electron",
-    "boilerplate",
-    "react",
-    "typescript",
-    "ts",
-    "sass",
-    "webpack",
-    "hot",
-    "reload"
+    "heroes",
+    "trymode",
+    "s2ma",
+    "blizzard",
+    "heroesofthestorm"
   ],
-  "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
+  "homepage": "https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer#README",
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.5",
     "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
@@ -181,7 +151,6 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "identity-obj-proxy": "^3.0.0",
-    "lint-staged": "^12.3.7",
     "mini-css-extract-plugin": "^2.6.0",
     "prettier": "^2.6.2",
     "react-refresh": "^0.12.0",

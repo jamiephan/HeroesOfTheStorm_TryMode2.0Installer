@@ -5,9 +5,10 @@ A Simple Installer for [Heroes of the Storm - Try Mode 2.0](https://jamiephan.gi
 
 ## Features:
 
+- Get Heroes of the Storm install path via Blizzard API (Agent Restful)
 - Fetch all map files from the [Try Mode 2.0 Page](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/releases/latest)
 - Apply the map in game ([rename the maps](https://jamiephan.github.io/HeroesOfTheStorm_TryMode2.0/install.html#runStormmap-customstormmap))
-- Manage the installed maps (Currently only support backup (manual restore) and delete)
+- Remove Installed Maps
 
 ## Screenshots:
 
@@ -43,8 +44,8 @@ npm run package
 
 ## TODOs:
 
- - [x] ([v1](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/tree/v1)) Overhaul the architecture (right now is just a quick draft)
- - [x] ([v1](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/tree/v1)) Make the UI more beautiful
+ - [x] ([v0.0.1](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/tree/v0.0.1)) Overhaul the architecture (right now is just a quick draft)
+ - [x] ([v0.0.1](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/tree/v0.0.1)) Make the UI more beautiful
  - [ ] Allow to run the map directly without overriding local map
  - [ ] Add Linux/MacOS Support and Binary Build
  - [ ] Icon for the Installer. (For now is Heroes's Icon)
