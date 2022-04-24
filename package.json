@@ -1,5 +1,5 @@
 {
-  "name": "electron-react-boilerplate",
+  "name": "heroesofthestorm-trymode2.0-installer",
   "description": "A foundation for scalable desktop apps",
   "scripts": {
     "build": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
@@ -86,8 +86,8 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate"
+      "owner": "jamiephan",
+      "repo": "HeroesOfTheStorm_TryMode2.0Installer"
     }
   },
   "repository": {
