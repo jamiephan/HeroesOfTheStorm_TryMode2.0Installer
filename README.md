@@ -44,8 +44,8 @@ npm run package
 
 ## TODOs:
 
- - [x] ([v0.0.1](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/tree/v0.0.1)) Overhaul the architecture (right now is just a quick draft)
- - [x] ([v0.0.1](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/tree/v0.0.1)) Make the UI more beautiful
+ - [x] ([ALPHA](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/tree/ALPHA)) Overhaul the architecture (right now is just a quick draft)
+ - [x] ([ALPHA](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/tree/ALPHA)) Make the UI more beautiful
  - [ ] Allow to run the map directly without overriding local map
  - [ ] Add Linux/MacOS Support and Binary Build
  - [ ] Icon for the Installer. (For now is Heroes's Icon)

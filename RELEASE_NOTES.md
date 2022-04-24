@@ -1,0 +1,4 @@
+ - `v1.0.0` release!
+ - Rewritten the whole app using React
+ - A fresh UI to match the theme with [Storm Map Generator](https://github.com/jamiephan/HeroesOfTheStorm_StormMapGenerator)
+ - Initial App release have been moved to [ALPHA](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/tree/APLHA) branch.

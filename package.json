@@ -18,6 +18,10 @@
     "productName": "Try Mode 2.0 Installer",
     "appId": "net.jamiephan.heroes.trymode2.0.installer",
     "artifactName": "TryMode2.0Installer-${version}-${os}_${arch}.${ext}",
+    "releaseInfo": {
+      "releaseName": "Try Mode 2.0 Installer v${version}",
+      "releaseNotesFile": "./RELEASE_NOTES.md"
+    },
     "asar": true,
     "asarUnpack": "**\\*.{node,dll}",
     "files": [
@@ -87,7 +91,8 @@
     "publish": {
       "provider": "github",
       "owner": "jamiephan",
-      "repo": "HeroesOfTheStorm_TryMode2.0Installer"
+      "repo": "HeroesOfTheStorm_TryMode2.0Installer",
+      "releaseType": "release"
     }
   },
   "repository": {
