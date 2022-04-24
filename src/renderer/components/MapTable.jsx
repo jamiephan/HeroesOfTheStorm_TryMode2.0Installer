@@ -42,31 +42,6 @@ export default function MapTable() {
       .catch(() => setIsError(true));
   }, []);
 
-  const installMap = (mapConfig) => {
-    dispatch({ type: 'INSTALL_MAP', config: mapConfig });
-    // const {
-    //   downloadLink,
-    //   downloadName,
-    //   downloadPrettyName,
-    //   name,
-    //   path,
-    //   file,
-    //   e,
-    // } = mapConfig;
-
-    // setIsInstalling(true);
-    // e.target.innerText = 'Installing...';
-    // window.electron.ipcRenderer.installMap();
-    // // setTimeout(() => {
-    // // }, 2000);
-    // // Install
-    // e.target.innerText = 'Install';
-    // setIsInstalling(false);
-    // e.target.disabled = true;
-    // // console.log(e.target);
-    // alert(downloadPrettyName);
-    // e.target.disabled = false;
-  };
 
   let html = null;
 
@@ -95,6 +70,7 @@ export default function MapTable() {
           </tr>
           <tr>
             <th>Map Name</th>
+            <th>Run Directly</th>
             {Object.keys(config.heroes.mapsPath).map((mapName) => (
               <th key={mapName}>{config.heroes.mapsPath[mapName].name}</th>
             ))}
@@ -116,13 +92,16 @@ export default function MapTable() {
                   </>
                 )}
               </td>
+              <td>
+                <Button onClick={() => dispatch("")}>Run</Button>
+              </td>
               {Object.keys(config.heroes.mapsPath).map((mapName) => (
                 <td key={`${mapName}-${asset.name}`}>
                   <Button
                     variant="secondary"
                     disabled={state?.isInstallingMap}
                     onClick={(e) =>
-                      installMap({
+                      dispatch({ type: 'INSTALL_MAP', config: {
                         downloadLink: asset.browser_download_url,
                         ...config.heroes.mapsPath[mapName],
                         downloadName: asset.name,
@@ -133,7 +112,7 @@ export default function MapTable() {
                             .replace('.AI', '')
                             .replace(/\./g, ' ') +
                           (asset.name.endsWith('.AI.stormmap') ? ' (AI)' : ''),
-                      })
+                      }})
                     }
                   >
                     Install
