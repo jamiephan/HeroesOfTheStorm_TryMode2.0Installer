@@ -70,7 +70,9 @@ export default function MapTable() {
           </tr>
           <tr>
             <th>Map Name</th>
-            <th>Run Directly</th>
+            {state?.settings?.platform === "win32" && (
+              <th>Run Directly</th>
+            )}
             {Object.keys(config.heroes.mapsPath).map((mapName) => (
               <th key={mapName}>{config.heroes.mapsPath[mapName].name}</th>
             ))}
@@ -92,9 +94,11 @@ export default function MapTable() {
                   </>
                 )}
               </td>
-              <td>
-                <Button onClick={() => dispatch("")}>Run</Button>
-              </td>
+              {state?.settings?.platform === "win32" && (
+                <td>
+                  <Button onClick={() => dispatch("")}>Run</Button>
+                </td>
+              )}
               {Object.keys(config.heroes.mapsPath).map((mapName) => (
                 <td key={`${mapName}-${asset.name}`}>
                   <Button
