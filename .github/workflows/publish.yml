@@ -43,3 +43,12 @@ jobs:
           npm run build
           # npm exec electron-builder -- --publish always --win --mac --linux
           npm exec electron-builder -- --publish always --win
+
+      - name: Update GitHub Release
+        uses: tubone24/update_release@v1.3.1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          release_name: "Try Mode 2.0 Installer (${{github.ref_name}})"
+          body_path: "./RELEASE_NOTES.md"
+

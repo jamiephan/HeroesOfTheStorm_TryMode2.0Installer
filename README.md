@@ -19,11 +19,11 @@ A Simple Installer for [Heroes of the Storm - Try Mode 2.0](https://jamiephan.gi
 
 Navigate to [Github Release](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/releases/latest), download and execute of the files:
 
-- [`TryMode2.0Installer-1.0.0-win_x64.exe`](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/releases/latest/download/TryMode2.0Installer-1.0.0-win_x64.exe)
+- `TryMode2.0Installer-{version}-win_x64.exe`
   - A single executable to run the application. No Setup/Extraction needed.
-- [`TryMode2.0Installer-1.0.0-win_x64.zip`](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/releases/latest/download/TryMode2.0Installer-1.0.0-win_x64.zip)
+- `TryMode2.0Installer-{version}-win_x64.zip`
   - A Compressed file for the application.
-- [`TryMode2.0InstallerSetup-1.0.0-win_x64.exe`](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/releases/latest/download/TryMode2.0InstallerSetup-1.0.0-win_x64.exe)
+- `TryMode2.0InstallerSetup-{version}-win_x64.exe`
   - A Setup Installer for the application. It will show up on your Start Menu/Installed Programs/Uninstall, like most installed programs that ran though a Setup process.
 
 ## Development:
