@@ -43,6 +43,11 @@ export default function MapTableHelp() {
             <code>Settings -&gt; Tutorial -&gt; Advanced</code>
           </li>
         </ul>
+        <p>
+          You can also click on &quot;Run&quot; to run the map directly without
+          overriding the maps above. However there will be some issues such as
+          talents not loading.
+        </p>
       </Alert>
     </>
   );

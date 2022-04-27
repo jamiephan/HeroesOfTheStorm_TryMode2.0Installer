@@ -21,6 +21,7 @@ import {
   getHeroesPath,
   validateHeroesPath,
   installOnlineMap,
+  runOnlineMap,
 } from './util';
 
 export default class AppUpdater {
@@ -157,6 +158,17 @@ ipcMain.on('install-map', async (event, config) => {
   event.reply('get-settings', await settings.get());
 });
 
+const tempMapsToCleanUp: string[] = [];
+ipcMain.on('run-map', async (event, config) => {
+  const heroesPath = await settings.get('heroesPath');
+  const result = await runOnlineMap(config, heroesPath);
+  if (!result.success) {
+    event.reply('electron-ipc-error', result.message);
+  } else {
+    tempMapsToCleanUp.push(result.tempMapPath);
+  }
+});
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
@@ -258,6 +270,12 @@ const createWindow = async () => {
  */
 
 app.on('window-all-closed', () => {
+  tempMapsToCleanUp.forEach((tempMapPath) => {
+    try {
+      fs.unlinkSync(tempMapPath);
+    } catch (e) {}
+  });
+
   // Respect the OSX convention of having the application in memory even
   // after all windows have been closed
   if (process.platform !== 'darwin') {

@@ -7,6 +7,7 @@ declare global {
         openHeroesInstallDialog(): void;
         closeWindow(): void;
         installMap(settings: Object): void;
+        runMap(settings: Object): void;
         openFolder(path: string): void;
         deleteInstalledMap(map: string): void;
         on(

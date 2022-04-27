@@ -17,6 +17,9 @@ contextBridge.exposeInMainWorld('electron', {
     installMap(settings: Object) {
       ipcRenderer.send('install-map', settings);
     },
+    runMap(settings: Object) {
+      ipcRenderer.send('run-map', settings);
+    },
     openFolder(path: string) {
       ipcRenderer.send('open-folder', path);
     },
