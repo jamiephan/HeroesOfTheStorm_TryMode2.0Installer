@@ -194,6 +194,7 @@ const createWindow = async () => {
     heroesPath: await getHeroesPath(),
     skipHeroesPathCheck: false,
     installedMaps: [],
+    platform: process.platform,
   };
 
   settings.setSync({ ...defaultSettings, ...(await settings.get()) });
