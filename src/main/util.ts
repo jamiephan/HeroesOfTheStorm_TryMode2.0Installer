@@ -3,6 +3,8 @@ import { URL } from 'url';
 import path from 'path';
 import axios from 'axios';
 import fs from 'fs';
+import tmp from 'tmp';
+import child_process from 'child_process';
 
 export let resolveHtmlPath: (htmlFileName: string) => string;
 
@@ -110,39 +112,98 @@ export const validateHeroesPath = (heroesPath: string): boolean => {
   return false;
 };
 
-export const installOnlineMap = async (
-  config: Object,
-  heroesPath: string
-): Promise<Object> => {
+const downloadMap = async (
+  url: string,
+  folder: string,
+  filename: string
+): Promise<object> => {
   try {
-    console.log(config);
-    console.log(`Downloading ${config.downloadLink}...`);
+    console.log(`Downloading ${url}...`);
     const download = await axios({
       method: 'GET',
       responseType: 'arraybuffer',
-      url: config.downloadLink,
+      url,
     });
+
     const file = Buffer.from(download.data);
-    console.log(`File Length: ${file.length}`);
+    console.log(`Downloaded File. Length: ${file.length}`);
 
     // If target folder exist
-    if (!fs.existsSync(`${heroesPath}/${config.path}`)) {
-      fs.mkdirSync(heroesPath + config.path, {
+    if (!fs.existsSync(folder)) {
+      fs.mkdirSync(folder, {
         recursive: true,
       });
     }
 
     // Save to file
-    fs.writeFileSync(`${heroesPath}/${config.path}/${config.file}`, file);
+    fs.writeFileSync(`${folder}/${filename}`, file);
+
+    return { success: true };
+  } catch (e) {
+    return { success: false, error: e };
+  }
+};
+
+export const installOnlineMap = async (
+  config: object,
+  heroesPath: string
+): Promise<object> => {
+  const result = await downloadMap(
+    config.downloadLink,
+    `${heroesPath}/${config.path}`,
+    config.file
+  );
+  return {
+    success: result.success,
+    message: result.success
+      ? `${config.downloadPrettyName} have been successfully installed. Please launch ${config.name} in the game to use the map.`
+      : result.error.message,
+  };
+};
+
+export const runOnlineMap = async (
+  config: object,
+  heroesPath: string
+): Promise<object> => {
+  const tempFile = tmp.fileSync({
+    postfix: '.stormmap',
+    discardDescriptor: true,
+  });
+
+  const result = await downloadMap(
+    config.downloadLink,
+    path.dirname(tempFile.name),
+    path.basename(tempFile.name)
+  );
+
+  if (result) {
+    if (process.platform === 'win32') {
+      console.log(
+        `"${heroesPath}/Support64/HeroesSwitcher_x64.exe" "${tempFile.name.replace(
+          /\\/g,
+          '/'
+        )}"`
+      );
+      child_process.execSync(
+        `"${heroesPath}/Support64/HeroesSwitcher_x64.exe" "${tempFile.name.replace(
+          /\\/g,
+          '/'
+        )}"`
+      );
+      return {
+        success: true,
+        message: `${config.downloadPrettyName} have been launched.`,
+        tempMapPath: tempFile.name,
+      };
+    }
 
     return {
-      success: true,
-      message: `${config.downloadPrettyName} have been successfully installed. Please launch ${config.name} in the game to use the map.`,
-    };
-  } catch (e) {
-    return {
       success: false,
-      message: e.message,
+      message: `Unsupported Platform to run the map directly.`,
     };
   }
+  return {
+    success: false,
+    message: result.error.message,
+  };
 };

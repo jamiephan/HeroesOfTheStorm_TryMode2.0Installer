@@ -42,7 +42,6 @@ export default function MapTable() {
       .catch(() => setIsError(true));
   }, []);
 
-
   let html = null;
 
   if (isLoading) {
@@ -70,11 +69,15 @@ export default function MapTable() {
           </tr>
           <tr>
             <th>Map Name</th>
-            {state?.settings?.platform === "win32" && (
-              <th>Run Directly</th>
+            {state?.settings?.platform === 'win32' && (
+              <th align="center" style={{ textAlign: 'center' }}>
+                Run Directly
+              </th>
             )}
             {Object.keys(config.heroes.mapsPath).map((mapName) => (
-              <th key={mapName}>{config.heroes.mapsPath[mapName].name}</th>
+              <th key={mapName} align="center" style={{ textAlign: 'center' }}>
+                {config.heroes.mapsPath[mapName].name}
+              </th>
             ))}
           </tr>
         </thead>
@@ -94,29 +97,56 @@ export default function MapTable() {
                   </>
                 )}
               </td>
-              {state?.settings?.platform === "win32" && (
-                <td>
-                  <Button onClick={() => dispatch("")}>Run</Button>
+              {state?.settings?.platform === 'win32' && (
+                <td align="center">
+                  <Button
+                    variant="success"
+                    onClick={() =>
+                      dispatch({
+                        type: 'RUN_MAP',
+                        config: {
+                          downloadLink: asset.browser_download_url,
+                          downloadName: asset.name,
+                          downloadPrettyName:
+                            asset.name
+                              .replace('.stormmap', '')
+                              .replace('.s', "'s")
+                              .replace('.AI', '')
+                              .replace(/\./g, ' ') +
+                            (asset.name.endsWith('.AI.stormmap')
+                              ? ' (AI)'
+                              : ''),
+                        },
+                      })
+                    }
+                  >
+                    Run
+                  </Button>
                 </td>
               )}
               {Object.keys(config.heroes.mapsPath).map((mapName) => (
-                <td key={`${mapName}-${asset.name}`}>
+                <td key={`${mapName}-${asset.name}`} align="center">
                   <Button
                     variant="secondary"
                     disabled={state?.isInstallingMap}
                     onClick={(e) =>
-                      dispatch({ type: 'INSTALL_MAP', config: {
-                        downloadLink: asset.browser_download_url,
-                        ...config.heroes.mapsPath[mapName],
-                        downloadName: asset.name,
-                        downloadPrettyName:
-                          asset.name
-                            .replace('.stormmap', '')
-                            .replace('.s', "'s")
-                            .replace('.AI', '')
-                            .replace(/\./g, ' ') +
-                          (asset.name.endsWith('.AI.stormmap') ? ' (AI)' : ''),
-                      }})
+                      dispatch({
+                        type: 'INSTALL_MAP',
+                        config: {
+                          downloadLink: asset.browser_download_url,
+                          ...config.heroes.mapsPath[mapName],
+                          downloadName: asset.name,
+                          downloadPrettyName:
+                            asset.name
+                              .replace('.stormmap', '')
+                              .replace('.s', "'s")
+                              .replace('.AI', '')
+                              .replace(/\./g, ' ') +
+                            (asset.name.endsWith('.AI.stormmap')
+                              ? ' (AI)'
+                              : ''),
+                        },
+                      })
                     }
                   >
                     Install

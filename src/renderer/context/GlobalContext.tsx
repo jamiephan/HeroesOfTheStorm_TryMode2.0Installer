@@ -66,6 +66,11 @@ const GlobalReducer = (
         isInstallingMap: true,
         installMapConfig: payload.config,
       };
+    case 'RUN_MAP':
+      window.electron.ipcRenderer.runMap(payload.config);
+      return {
+        ...state,
+      };
     case 'FINISHED_INSTALL_MAP':
       return {
         ...state,
