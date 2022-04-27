@@ -115,10 +115,13 @@ export const installOnlineMap = async (
   heroesPath: string
 ): Promise<Object> => {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 0));
     console.log(config);
     console.log(`Downloading ${config.downloadLink}...`);
-    const download = await axios.get(config.downloadLink);
+    const download = await axios({
+      method: 'GET',
+      responseType: 'arraybuffer',
+      url: config.downloadLink,
+    });
     const file = Buffer.from(download.data);
     console.log(`File Length: ${file.length}`);
 
