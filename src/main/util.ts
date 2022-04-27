@@ -29,7 +29,7 @@ export const getHeroesPath = async (): Promise<string | null> => {
     const agentJson = await axios.get('http://localhost:1120/agent');
     // const agentJson = await agent.json();
 
-    const authKey = agentJson.authorization;
+    const authKey = agentJson.data?.authorization;
 
     // Fetch Heroes of the Storm Path
     // There are issue with the API that does not follow the RESTful API spec. Headers should be non-case insensitive.
@@ -57,7 +57,7 @@ export const getHeroesPath = async (): Promise<string | null> => {
     const heroesJson = await heroesFetch;
     // const heroesJson = await heroes.json();
 
-    return heroesJson?.install_dir;
+    return heroesJson.data?.install_dir;
   } catch (e) {
     return null;
   }
