@@ -1,3 +1,1 @@
-- Fix Installed map was invalid
-- Fix ESlint issue in development
-- Fix Incorrect VSCode config
+- Added the support to run the map directly without overriding local map

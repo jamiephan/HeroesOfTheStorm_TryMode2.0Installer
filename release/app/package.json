@@ -1,6 +1,6 @@
 {
   "name": "trymode2.0-installer",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "An Installer for Heroes of the Storm - Try Mode 2.0",
   "main": "./dist/main/main.js",
   "author": {
