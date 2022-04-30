@@ -44,6 +44,7 @@ let mainWindow: BrowserWindow | null = null;
 
 const validateSettings = async () => {
   const heroesPath = await settings.get('heroesPath');
+  const skipHeroesPathCheck = await settings.get('skipHeroesPathCheck');
   let newHeroesPath = heroesPath;
   const newInstalledMaps: string[] = [];
 
@@ -52,6 +53,11 @@ const validateSettings = async () => {
     const isDir = (await fs.promises.stat(newHeroesPath)).isDirectory();
     if (!isDir) {
       newHeroesPath = null;
+    } else if (!skipHeroesPathCheck) {
+      const isValid = validateHeroesPath(newHeroesPath);
+      if (!isValid) {
+        newHeroesPath = null;
+      }
     }
   } catch (e) {
     newHeroesPath = null;
