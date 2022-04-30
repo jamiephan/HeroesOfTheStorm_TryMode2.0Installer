@@ -206,6 +206,7 @@ const createWindow = async () => {
     heroesPath: await getHeroesPath(),
     skipHeroesPathCheck: false,
     installedMaps: [],
+    showStormMapGenerator: false,
     platform: process.platform,
   };
 
