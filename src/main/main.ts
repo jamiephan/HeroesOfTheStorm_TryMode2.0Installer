@@ -210,11 +210,11 @@ ipcMain.on('set-settings', async (event, newSettings) => {
   event.reply('get-settings', await settings.get());
 });
 
-ipcMain.on('open-folder', async (event, path) => {
-  if (path) {
-    shell.openPath(path);
+ipcMain.on('open-folder', async (event, fileDirPath) => {
+  if (fileDirPath) {
+    shell.openPath(path.normalize(fileDirPath));
   } else {
-    event.reply('electron-ipc-error', `Invalid Folder Path: ${path}`);
+    event.reply('electron-ipc-error', `Invalid Folder Path: ${fileDirPath}`);
   }
 });
 
