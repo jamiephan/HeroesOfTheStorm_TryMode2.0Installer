@@ -10,6 +10,7 @@ declare global {
         runMap(settings: Object): void;
         openFolder(path: string): void;
         deleteInstalledMap(map: string): void;
+        openStormMapGenerator(config: Object): void;
         on(
           channel: string,
           func: (...args: unknown[]) => void

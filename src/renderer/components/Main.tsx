@@ -4,8 +4,8 @@ import Config from './Config';
 import InstalledMaps from './InstalledMaps';
 import MapTable from './MapTable';
 import MapTableHelp from './MapTableHelp';
-import OpenFolderButton from './OpenFolderButton';
 import AlertDialog from './shared/AlertDialog';
+import StormMapGenerator from './StormMapGenerator';
 
 export default function Main() {
   const { state } = useContext(GlobalContext);
@@ -27,6 +27,7 @@ export default function Main() {
                 <InstalledMaps />
               </>
             )}
+          {state?.settings?.showStormMapGenerator && <StormMapGenerator />}
           <h3>Map Installation:</h3>
           <MapTableHelp />
           <MapTable />
