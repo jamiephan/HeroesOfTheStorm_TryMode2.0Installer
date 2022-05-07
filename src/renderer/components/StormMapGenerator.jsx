@@ -25,8 +25,8 @@ export default function StormMapGenerator() {
           and install it
         </p>
         <p>
-          However, It is still in an experimental mode. Some features from the
-          Storm Map Generator might not work.
+          However, It is still experimental. Some features from the Storm Map
+          Generator might not work.
         </p>
       </Alert>
       <Table bordered>
@@ -44,7 +44,7 @@ export default function StormMapGenerator() {
             {Object.keys(config.heroes.mapsPath).map((mapName) => (
               <td key={mapName} align="center" style={{ textAlign: 'center' }}>
                 {!state.settings.activeStormmapGeneratorWindow.includes(
-                    config.heroes.mapsPath[mapName].name
+                  config.heroes.mapsPath[mapName].name
                 ) ? (
                   <Button
                     variant="primary"
@@ -53,22 +53,22 @@ export default function StormMapGenerator() {
                         type: 'OPEN_STORMMAP_GENERATOR',
                         config: config.heroes.mapsPath[mapName],
                       })
-                  }
+                    }
                   >
                     Launch
                   </Button>
                 ) : (
                   <Button
                     variant="danger"
-                  onClick={() =>
-                    dispatch({
+                    onClick={() =>
+                      dispatch({
                         type: 'CLOSE_STORMMAP_GENERATOR',
-                      config: config.heroes.mapsPath[mapName],
-                    })
-                  }
-                >
+                        config: config.heroes.mapsPath[mapName],
+                      })
+                    }
+                  >
                     Force Close
-                </Button>
+                  </Button>
                 )}
               </td>
             ))}
