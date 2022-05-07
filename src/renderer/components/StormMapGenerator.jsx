@@ -9,9 +9,8 @@ export default function StormMapGenerator() {
 
   return (
     <>
-      <h3>Storm Map Generator (Experimental):</h3>
-      <Alert variant="warning">
-        <h5>Warning: Experimental!</h5>
+      <h3>Storm Map Generator:</h3>
+      <Alert>
         <p>
           This section allows you to generate your custom map from{' '}
           <ElectronLink href="https://stormmap.herokuapp.com/">
@@ -22,11 +21,7 @@ export default function StormMapGenerator() {
             Source Code
           </ElectronLink>
           ) and install it directly to the game modes without manually download
-          and install it
-        </p>
-        <p>
-          However, It is still experimental. Some features from the Storm Map
-          Generator might not work.
+          and install it.
         </p>
       </Alert>
       <Table bordered>

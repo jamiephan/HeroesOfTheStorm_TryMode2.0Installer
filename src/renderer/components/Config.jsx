@@ -69,8 +69,7 @@ export default function Config() {
               </code>
             </td>
             <td>
-              Show the experimental Storm Map Generator Config Section.{' '}
-              <b>(Optional)</b>
+              Show the Storm Map Generator Config Section. <b>(Optional)</b>
             </td>
             <td>
               <Button
