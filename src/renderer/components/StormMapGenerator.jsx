@@ -43,30 +43,33 @@ export default function StormMapGenerator() {
           <tr>
             {Object.keys(config.heroes.mapsPath).map((mapName) => (
               <td key={mapName} align="center" style={{ textAlign: 'center' }}>
-                <Button
-                  disabled={state.settings.activeStormmapGeneratorWindow.includes(
+                {!state.settings.activeStormmapGeneratorWindow.includes(
                     config.heroes.mapsPath[mapName].name
-                  )}
-                  variant={
-                    !state.settings.activeStormmapGeneratorWindow.includes(
-                      config.heroes.mapsPath[mapName].name
-                    )
-                      ? 'primary'
-                      : 'secondary'
+                ) ? (
+                  <Button
+                    variant="primary"
+                    onClick={() =>
+                      dispatch({
+                        type: 'OPEN_STORMMAP_GENERATOR',
+                        config: config.heroes.mapsPath[mapName],
+                      })
                   }
+                  >
+                    Launch
+                  </Button>
+                ) : (
+                  <Button
+                    variant="danger"
                   onClick={() =>
                     dispatch({
-                      type: 'OPEN_STORMMAP_GENERATOR',
+                        type: 'CLOSE_STORMMAP_GENERATOR',
                       config: config.heroes.mapsPath[mapName],
                     })
                   }
                 >
-                  {state.settings.activeStormmapGeneratorWindow.includes(
-                    config.heroes.mapsPath[mapName].name
-                  )
-                    ? 'Launched...'
-                    : 'Launch'}
+                    Force Close
                 </Button>
+                )}
               </td>
             ))}
           </tr>

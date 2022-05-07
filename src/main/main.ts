@@ -91,6 +91,12 @@ ipcMain.on('close-window', () => {
 
 const stormWindows = {};
 
+ipcMain.on('close-storm-map-generator', async (event, cfg) => {
+  if (stormWindows[cfg.name]) {
+    return stormWindows[cfg.name].close();
+  }
+});
+
 ipcMain.on('open-storm-map-generator', async (event, cfg) => {
   const activeStormmapGeneratorWindow = await settings.get(
     'activeStormmapGeneratorWindow'

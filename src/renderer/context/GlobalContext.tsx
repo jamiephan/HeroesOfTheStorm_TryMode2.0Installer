@@ -102,6 +102,11 @@ const GlobalReducer = (
       return {
         ...state,
       };
+    case 'CLOSE_STORMMAP_GENERATOR':
+      window.electron.ipcRenderer.closeStormMapGenerator(payload.config);
+      return {
+        ...state,
+      };
     default:
       return state;
   }
