@@ -119,6 +119,7 @@ ipcMain.on('open-storm-map-generator', async (event, cfg) => {
   stormWindows[cfg.name] = new BrowserWindow({
     width: 800,
     height: 600,
+    frame: false,
     icon: getAssetPath('icon.png'),
   });
 
@@ -186,7 +187,9 @@ ipcMain.on('open-storm-map-generator', async (event, cfg) => {
     }
   );
 
-  await stormWindows[cfg.name].loadURL('http://stormmap.herokuapp.com');
+  await stormWindows[cfg.name].loadURL(
+    `https://stormmap.herokuapp.com/?type=INSTALLER&mapName=${cfg.name}`
+  );
   stormWindows[cfg.name].focus();
 });
 
