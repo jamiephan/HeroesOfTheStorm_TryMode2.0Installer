@@ -26,6 +26,12 @@ contextBridge.exposeInMainWorld('electron', {
     deleteInstalledMap(map: string) {
       ipcRenderer.send('delete-installed-map', map);
     },
+    openStormMapGenerator(config: Object) {
+      ipcRenderer.send('open-storm-map-generator', config);
+    },
+    closeStormMapGenerator(config: Object) {
+      ipcRenderer.send('close-storm-map-generator', config);
+    },
     on(channel: string, func: (...args: unknown[]) => void) {
       const validChannels = [
         'ipc-example',

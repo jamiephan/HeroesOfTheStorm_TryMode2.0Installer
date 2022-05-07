@@ -61,6 +61,30 @@ export default function Config() {
               </Button>
             </td>
           </tr>
+          <tr>
+            <td>showStormMapGenerator</td>
+            <td>
+              <code>
+                {state?.settings?.showStormMapGenerator ? 'true' : 'false'}
+              </code>
+            </td>
+            <td>
+              Show the Storm Map Generator Config Section. <b>(Optional)</b>
+            </td>
+            <td>
+              <Button
+                onClick={() =>
+                  dispatch({
+                    type: 'SET_SETTINGS',
+                    showStormMapGenerator:
+                      !state?.settings?.showStormMapGenerator,
+                  })
+                }
+              >
+                Toggle
+              </Button>
+            </td>
+          </tr>
         </tbody>
       </Table>
     </>

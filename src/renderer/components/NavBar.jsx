@@ -13,7 +13,8 @@ export default function NavBar() {
     <Navbar
       bg="dark"
       variant="dark"
-      style={{ marginBottom: '10px', '-webkit-app-region': 'drag' }}
+      style={{ '-webkit-app-region': 'drag' }}
+      className="navbar"
     >
       <Container>
         <Navbar.Brand>
@@ -78,7 +79,7 @@ export default function NavBar() {
               style={{ '-webkit-app-region': 'no-drag', marginRight: '10px' }}
               path={state?.settings?.heroesPath}
             >
-              Open
+              Open Heroes Folder
             </OpenFolderButton>
           )}
           <CloseAppButton style={{ '-webkit-app-region': 'no-drag' }}>

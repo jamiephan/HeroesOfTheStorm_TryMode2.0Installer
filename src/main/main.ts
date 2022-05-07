@@ -32,10 +32,19 @@ export default class AppUpdater {
   }
 }
 
+const RESOURCES_PATH = app.isPackaged
+  ? path.join(process.resourcesPath, 'assets')
+  : path.join(__dirname, '../../assets');
+
+const getAssetPath = (...paths: string[]): string => {
+  return path.join(RESOURCES_PATH, ...paths);
+};
+
 let mainWindow: BrowserWindow | null = null;
 
 const validateSettings = async () => {
   const heroesPath = await settings.get('heroesPath');
+  const skipHeroesPathCheck = await settings.get('skipHeroesPathCheck');
   let newHeroesPath = heroesPath;
   const newInstalledMaps: string[] = [];
 
@@ -44,6 +53,11 @@ const validateSettings = async () => {
     const isDir = (await fs.promises.stat(newHeroesPath)).isDirectory();
     if (!isDir) {
       newHeroesPath = null;
+    } else if (!skipHeroesPathCheck) {
+      const isValid = validateHeroesPath(newHeroesPath);
+      if (!isValid) {
+        newHeroesPath = null;
+      }
     }
   } catch (e) {
     newHeroesPath = null;
@@ -73,6 +87,110 @@ const validateSettings = async () => {
 ipcMain.on('close-window', () => {
   // mainWindow.close();
   app.quit();
+});
+
+const stormWindows = {};
+
+ipcMain.on('close-storm-map-generator', async (event, cfg) => {
+  if (stormWindows[cfg.name]) {
+    return stormWindows[cfg.name].close();
+  }
+});
+
+ipcMain.on('open-storm-map-generator', async (event, cfg) => {
+  const activeStormmapGeneratorWindow = await settings.get(
+    'activeStormmapGeneratorWindow'
+  );
+
+  if (stormWindows[cfg.name]) {
+    return stormWindows[cfg.name].show();
+  }
+
+  if (!activeStormmapGeneratorWindow.includes(cfg.name)) {
+    activeStormmapGeneratorWindow.push(cfg.name);
+    await settings.set(
+      'activeStormmapGeneratorWindow',
+      activeStormmapGeneratorWindow
+    );
+    event.reply('get-settings', await settings.get());
+  }
+
+  const heroesPath = await settings.get('heroesPath');
+  stormWindows[cfg.name] = new BrowserWindow({
+    width: 800,
+    height: 600,
+    frame: false,
+    icon: getAssetPath('icon.png'),
+  });
+
+  stormWindows[cfg.name].setMenu(null);
+  stormWindows[cfg.name].setTitle(
+    `Try Mode 2.0 Installer - Storm Map Generator for ${cfg.name}`
+  );
+
+  // Disable Navigation
+  stormWindows[cfg.name].webContents.on('will-navigate', (e) => {
+    e.preventDefault();
+  });
+
+  stormWindows[cfg.name].webContents.setWindowOpenHandler((edata) => {
+    shell.openExternal(edata.url);
+    return { action: 'deny' };
+  });
+
+  // Clean up on close
+  stormWindows[cfg.name].on('closed', async () => {
+    stormWindows[cfg.name] = null;
+
+    if (activeStormmapGeneratorWindow.includes(cfg.name)) {
+      // activeStormmapGeneratorWindow.filter((n) => n !== cfg.name);
+      activeStormmapGeneratorWindow.splice(
+        activeStormmapGeneratorWindow.indexOf(cfg.name),
+        1
+      );
+      await settings.set(
+        'activeStormmapGeneratorWindow',
+        activeStormmapGeneratorWindow
+      );
+    }
+
+    await validateSettings();
+    event.reply('get-settings', await settings.get());
+    mainWindow.focus();
+  });
+
+  stormWindows[cfg.name].on('page-title-updated', (e) => {
+    e.preventDefault();
+  });
+
+  // On stormmap download
+  stormWindows[cfg.name].webContents.session.on(
+    'will-download',
+    async (e, item, webContents) => {
+      item.setSavePath(path.normalize(`${heroesPath}/${cfg.path}/${cfg.file}`));
+      item.once('done', async (ev, state) => {
+        if (state === 'completed') {
+          console.log('Download successfully');
+          event.reply('finish-install-map', {
+            success: true,
+            message: `The generated map have been successfully installed. Please launch ${cfg.name} in the game to use the map.`,
+          });
+          stormWindows[cfg.name].close();
+        } else {
+          console.log(`Download failed: ${state}`);
+          event.reply('finish-install-map', {
+            success: false,
+            message: 'The download have been interrupted.',
+          });
+        }
+      });
+    }
+  );
+
+  await stormWindows[cfg.name].loadURL(
+    `https://stormmap.herokuapp.com/?type=INSTALLER&mapName=${cfg.name}`
+  );
+  stormWindows[cfg.name].focus();
 });
 
 ipcMain.on('delete-installed-map', async (event, map) => {
@@ -107,11 +225,11 @@ ipcMain.on('set-settings', async (event, newSettings) => {
   event.reply('get-settings', await settings.get());
 });
 
-ipcMain.on('open-folder', async (event, path) => {
-  if (path) {
-    shell.openPath(path);
+ipcMain.on('open-folder', async (event, fileDirPath) => {
+  if (fileDirPath) {
+    shell.openPath(path.normalize(fileDirPath));
   } else {
-    event.reply('electron-ipc-error', `Invalid Folder Path: ${path}`);
+    event.reply('electron-ipc-error', `Invalid Folder Path: ${fileDirPath}`);
   }
 });
 
@@ -206,18 +324,12 @@ const createWindow = async () => {
     heroesPath: await getHeroesPath(),
     skipHeroesPathCheck: false,
     installedMaps: [],
+    activeStormmapGeneratorWindow: [],
+    showStormMapGenerator: false,
     platform: process.platform,
   };
 
   settings.setSync({ ...defaultSettings, ...(await settings.get()) });
-
-  const RESOURCES_PATH = app.isPackaged
-    ? path.join(process.resourcesPath, 'assets')
-    : path.join(__dirname, '../../assets');
-
-  const getAssetPath = (...paths: string[]): string => {
-    return path.join(RESOURCES_PATH, ...paths);
-  };
 
   mainWindow = new BrowserWindow({
     show: true,

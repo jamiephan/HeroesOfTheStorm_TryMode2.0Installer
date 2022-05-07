@@ -1,1 +1,7 @@
-- Added the support to run the map directly without overriding local map
+- Title bar is now always stays on top, hence moving the window can be much easier.
+- Better error handing when running stormmap directly
+- Added the functionality to run and install maps from  [Storm Map Generator](https://stormmap.herokuapp.com/).
+  - This can be enabled the `showStormMapGenerator` option in the settings section.
+  - After generated the map, the map will automatically installed to the targeted game mode.
+  - Each game mode can launch a separate Storm Map Generator window and cannot be launched more than once before closing it.
+  - Due to the design of Storm Map Generator, the settings will persist even after it was closed.

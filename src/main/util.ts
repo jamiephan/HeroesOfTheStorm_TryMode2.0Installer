@@ -177,23 +177,24 @@ export const runOnlineMap = async (
   );
 
   if (result) {
-    if (process.platform === 'win32') {
-      console.log(
-        `"${heroesPath}/Support64/HeroesSwitcher_x64.exe" "${tempFile.name.replace(
-          /\\/g,
-          '/'
-        )}"`
-      );
-      child_process.execSync(
-        `"${heroesPath}/Support64/HeroesSwitcher_x64.exe" "${tempFile.name.replace(
-          /\\/g,
-          '/'
-        )}"`
-      );
+    try {
+      if (process.platform === 'win32') {
+        child_process.execSync(
+          `"${heroesPath}/Support64/HeroesSwitcher_x64.exe" "${tempFile.name.replace(
+            /\\/g,
+            '/'
+          )}"`
+        );
+        return {
+          success: true,
+          message: `${config.downloadPrettyName} have been launched.`,
+          tempMapPath: tempFile.name,
+        };
+      }
+    } catch (e) {
       return {
-        success: true,
-        message: `${config.downloadPrettyName} have been launched.`,
-        tempMapPath: tempFile.name,
+        success: false,
+        message: e.message,
       };
     }
 
