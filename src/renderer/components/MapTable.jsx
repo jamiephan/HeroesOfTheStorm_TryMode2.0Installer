@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Button, Form, Table } from 'react-bootstrap';
 
 import config from '../../../config';
 import ElectronLink from './shared/ElectronLink';
@@ -95,6 +95,27 @@ export default function MapTable() {
             </th>
           </tr>
           <tr>
+              <th
+                colSpan={
+                  1 +
+                  (state?.settings?.platform === 'win32' ? 1 : 0) +
+                  Object.keys(config.heroes.mapsPath).length
+                }
+              >
+                <div style={{ display: 'flex' }}>
+                  <div style={{ alignSelf: 'center' }}>Filter:</div>
+                  <div style={{ marginLeft: '20px' }}>
+                    <Form.Control
+                      type="text"
+                      placeholder="Alterac Pass"
+                      value={filterText}
+                      onChange={(e) => setFilterText(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </th>
+            </tr>
+            <tr>
             <th>Map Name</th>
             {state?.settings?.platform === 'win32' && (
               <th align="center" style={{ textAlign: 'center' }}>
