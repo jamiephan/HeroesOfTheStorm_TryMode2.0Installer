@@ -121,6 +121,7 @@ ipcMain.on('open-storm-map-generator', async (event, cfg) => {
     height: 600,
     frame: false,
     icon: getAssetPath('icon.png'),
+    backgroundColor: '#1a0933',
   });
 
   stormWindows[cfg.name].setMenu(null);
