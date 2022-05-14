@@ -61,7 +61,13 @@ export default function MapTable() {
       <Table bordered>
         <thead style={{ position: 'sticky' }}>
           <tr>
-            <th colSpan="5">
+              <th
+                colSpan={
+                  1 +
+                  (state?.settings?.platform === 'win32' ? 1 : 0) +
+                  Object.keys(config.heroes.mapsPath).length
+                }
+              >
               Latest Commit:{' '}
               <ElectronLink href={htmlUrl}>{commitMessage}</ElectronLink> (
               {getRelativeTime(timestamp)})
