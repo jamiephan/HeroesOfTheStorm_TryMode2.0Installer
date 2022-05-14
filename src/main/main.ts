@@ -328,6 +328,7 @@ const createWindow = async () => {
     activeStormmapGeneratorWindow: [],
     showStormMapGenerator: false,
     platform: process.platform,
+    mapFilterText: '',
   };
 
   settings.setSync({

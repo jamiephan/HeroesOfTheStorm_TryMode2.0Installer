@@ -33,6 +33,10 @@ export default function MapTable() {
   const [isLoading, setIsLoading] = useState(true);
   const [apiResponse, setApiResponse] = useState(null);
   const [isError, setIsError] = useState(false);
+  const [filterText, setFilterText] = useState(
+    state?.settings?.mapFilterText || ''
+  );
+  const [filteredList, setFilteredList] = useState([]);
 
   useEffect(() => {
     fetch(config.git.url.api.release)
@@ -41,6 +45,23 @@ export default function MapTable() {
       .finally(() => setIsLoading(false))
       .catch(() => setIsError(true));
   }, []);
+
+  useEffect(() => {
+    if (!apiResponse && !apiResponse?.assets && !filterText) return;
+    const assetList = apiResponse?.assets || [];
+    const filtered = assetList.filter((a) =>
+      a.name
+        .toLowerCase()
+        .replace(/[.]/g, '')
+        .includes(filterText.toLowerCase().replace(/[. ()]/g, ''))
+    );
+    dispatch({
+      type: 'SET_SETTINGS',
+      mapFilterText: filterText,
+    });
+    setFilteredList(filtered);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterText, apiResponse]);
 
   let html = null;
 
@@ -88,7 +109,7 @@ export default function MapTable() {
           </tr>
         </thead>
         <tbody>
-          {assets.map((asset) => (
+            {filteredList.map((asset) => (
             <tr key={asset.name}>
               <td>
                 {asset.name
