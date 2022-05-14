@@ -153,7 +153,7 @@ export default function MapTable() {
                 {state?.settings?.platform === 'win32' && (
                   <td align="center">
                     <Button
-                      variant="success"
+                      variant="secondary"
                       onClick={() =>
                         dispatch({
                           type: 'RUN_MAP',
@@ -180,7 +180,7 @@ export default function MapTable() {
                 {Object.keys(config.heroes.mapsPath).map((mapName) => (
                   <td key={`${mapName}-${asset.name}`} align="center">
                     <Button
-                      variant="secondary"
+                      variant="primary"
                       disabled={state?.isInstallingMap}
                       onClick={() =>
                         dispatch({
