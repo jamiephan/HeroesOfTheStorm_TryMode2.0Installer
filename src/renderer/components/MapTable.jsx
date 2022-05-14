@@ -129,7 +129,7 @@ export default function MapTable() {
                   <Button
                     variant="secondary"
                     disabled={state?.isInstallingMap}
-                    onClick={(e) =>
+                    onClick={() =>
                       dispatch({
                         type: 'INSTALL_MAP',
                         config: {
