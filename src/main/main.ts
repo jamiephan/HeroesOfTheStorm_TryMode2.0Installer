@@ -121,6 +121,7 @@ ipcMain.on('open-storm-map-generator', async (event, cfg) => {
     height: 600,
     frame: false,
     icon: getAssetPath('icon.png'),
+    backgroundColor: '#1a0933',
   });
 
   stormWindows[cfg.name].setMenu(null);
@@ -327,9 +328,14 @@ const createWindow = async () => {
     activeStormmapGeneratorWindow: [],
     showStormMapGenerator: false,
     platform: process.platform,
+    mapFilterText: '',
   };
 
-  settings.setSync({ ...defaultSettings, ...(await settings.get()) });
+  settings.setSync({
+    ...defaultSettings,
+    ...(await settings.get()),
+    activeStormmapGeneratorWindow: [],
+  });
 
   mainWindow = new BrowserWindow({
     show: true,
