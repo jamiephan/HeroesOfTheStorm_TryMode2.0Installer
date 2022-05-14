@@ -49,6 +49,7 @@ npm run package
  - [x] ([ALPHA](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/tree/ALPHA)) Make the UI more beautiful
  - [x] Allow to run the map directly without overriding local map
  - [x] Integrate [Storm Map Generator](https://stormmap.herokuapp.com/)
+ - [x] Add a filter/search functionality for map list
  - [ ] Add Linux/MacOS Support and Binary Build
  - [ ] Icon for the Installer. (For now is Heroes's Icon)
  - [ ] Allows to run any `*.stormmap` directly
@@ -58,7 +59,14 @@ npm run package
 
 ## Screenshots:
 
-![Main UI](https://i.imgur.com/vqEyd9V.png)
-![Map List](https://i.imgur.com/Ew1Qvfm.png)
+### Main UI: 
+![Main UI](https://i.imgur.com/14zoSr9.png)
+
+### Try Mode 2.0 List:
+![Map List](https://i.imgur.com/IZNtWUn.png)
+
+### Storm Map Generator Launcher:
 ![Storm Map Generator launcher](https://i.imgur.com/F7ABrVw.png)
+
+### Storm Map Generator:
 ![Storm Map Generator](https://i.imgur.com/c2TPTUT.png)
