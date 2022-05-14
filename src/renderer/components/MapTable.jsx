@@ -79,9 +79,10 @@ export default function MapTable() {
     } = apiResponse;
 
     html = (
-      <Table bordered>
-        <thead style={{ position: 'sticky' }}>
-          <tr>
+      <div style={{ minHeight: '500px' }}>
+        <Table bordered>
+          <thead style={{ position: 'sticky' }}>
+            <tr>
               <th
                 colSpan={
                   1 +
@@ -89,12 +90,12 @@ export default function MapTable() {
                   Object.keys(config.heroes.mapsPath).length
                 }
               >
-              Latest Commit:{' '}
-              <ElectronLink href={htmlUrl}>{commitMessage}</ElectronLink> (
-              {getRelativeTime(timestamp)})
-            </th>
-          </tr>
-          <tr>
+                Latest Commit:{' '}
+                <ElectronLink href={htmlUrl}>{commitMessage}</ElectronLink> (
+                {getRelativeTime(timestamp)})
+              </th>
+            </tr>
+            <tr>
               <th
                 colSpan={
                   1 +
@@ -116,95 +117,100 @@ export default function MapTable() {
               </th>
             </tr>
             <tr>
-            <th>Map Name</th>
-            {state?.settings?.platform === 'win32' && (
-              <th align="center" style={{ textAlign: 'center' }}>
-                Run Directly
-              </th>
-            )}
-            {Object.keys(config.heroes.mapsPath).map((mapName) => (
-              <th key={mapName} align="center" style={{ textAlign: 'center' }}>
-                {config.heroes.mapsPath[mapName].name}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-            {filteredList.map((asset) => (
-            <tr key={asset.name}>
-              <td>
-                {asset.name
-                  .replace('.stormmap', '')
-                  .replace('.s', "'s")
-                  .replace('.AI', '')
-                  .replace(/\./g, ' ')}
-                {asset.name.endsWith('.AI.stormmap') && (
-                  <>
-                    {' '}
-                    <b>(AI)</b>
-                  </>
-                )}
-              </td>
+              <th>Map Name</th>
               {state?.settings?.platform === 'win32' && (
-                <td align="center">
-                  <Button
-                    variant="success"
-                    onClick={() =>
-                      dispatch({
-                        type: 'RUN_MAP',
-                        config: {
-                          downloadLink: asset.browser_download_url,
-                          downloadName: asset.name,
-                          downloadPrettyName:
-                            asset.name
-                              .replace('.stormmap', '')
-                              .replace('.s', "'s")
-                              .replace('.AI', '')
-                              .replace(/\./g, ' ') +
-                            (asset.name.endsWith('.AI.stormmap')
-                              ? ' (AI)'
-                              : ''),
-                        },
-                      })
-                    }
-                  >
-                    Run
-                  </Button>
-                </td>
+                <th align="center" style={{ textAlign: 'center' }}>
+                  Run Directly
+                </th>
               )}
               {Object.keys(config.heroes.mapsPath).map((mapName) => (
-                <td key={`${mapName}-${asset.name}`} align="center">
-                  <Button
-                    variant="secondary"
-                    disabled={state?.isInstallingMap}
-                    onClick={() =>
-                      dispatch({
-                        type: 'INSTALL_MAP',
-                        config: {
-                          downloadLink: asset.browser_download_url,
-                          ...config.heroes.mapsPath[mapName],
-                          downloadName: asset.name,
-                          downloadPrettyName:
-                            asset.name
-                              .replace('.stormmap', '')
-                              .replace('.s', "'s")
-                              .replace('.AI', '')
-                              .replace(/\./g, ' ') +
-                            (asset.name.endsWith('.AI.stormmap')
-                              ? ' (AI)'
-                              : ''),
-                        },
-                      })
-                    }
-                  >
-                    Install
-                  </Button>
-                </td>
+                <th
+                  key={mapName}
+                  align="center"
+                  style={{ textAlign: 'center' }}
+                >
+                  {config.heroes.mapsPath[mapName].name}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {filteredList.map((asset) => (
+              <tr key={asset.name}>
+                <td>
+                  {asset.name
+                    .replace('.stormmap', '')
+                    .replace('.s', "'s")
+                    .replace('.AI', '')
+                    .replace(/\./g, ' ')}
+                  {asset.name.endsWith('.AI.stormmap') && (
+                    <>
+                      {' '}
+                      <b>(AI)</b>
+                    </>
+                  )}
+                </td>
+                {state?.settings?.platform === 'win32' && (
+                  <td align="center">
+                    <Button
+                      variant="success"
+                      onClick={() =>
+                        dispatch({
+                          type: 'RUN_MAP',
+                          config: {
+                            downloadLink: asset.browser_download_url,
+                            downloadName: asset.name,
+                            downloadPrettyName:
+                              asset.name
+                                .replace('.stormmap', '')
+                                .replace('.s', "'s")
+                                .replace('.AI', '')
+                                .replace(/\./g, ' ') +
+                              (asset.name.endsWith('.AI.stormmap')
+                                ? ' (AI)'
+                                : ''),
+                          },
+                        })
+                      }
+                    >
+                      Run
+                    </Button>
+                  </td>
+                )}
+                {Object.keys(config.heroes.mapsPath).map((mapName) => (
+                  <td key={`${mapName}-${asset.name}`} align="center">
+                    <Button
+                      variant="secondary"
+                      disabled={state?.isInstallingMap}
+                      onClick={() =>
+                        dispatch({
+                          type: 'INSTALL_MAP',
+                          config: {
+                            downloadLink: asset.browser_download_url,
+                            ...config.heroes.mapsPath[mapName],
+                            downloadName: asset.name,
+                            downloadPrettyName:
+                              asset.name
+                                .replace('.stormmap', '')
+                                .replace('.s', "'s")
+                                .replace('.AI', '')
+                                .replace(/\./g, ' ') +
+                              (asset.name.endsWith('.AI.stormmap')
+                                ? ' (AI)'
+                                : ''),
+                          },
+                        })
+                      }
+                    >
+                      Install
+                    </Button>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     );
   }
 
