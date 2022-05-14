@@ -81,7 +81,7 @@ export default function MapTable() {
     html = (
       <div style={{ minHeight: '500px' }}>
         <Table bordered>
-          <thead style={{ position: 'sticky' }}>
+          <thead>
             <tr>
               <th
                 colSpan={
@@ -90,21 +90,8 @@ export default function MapTable() {
                   Object.keys(config.heroes.mapsPath).length
                 }
               >
-                Latest Commit:{' '}
-                <ElectronLink href={htmlUrl}>{commitMessage}</ElectronLink> (
-                {getRelativeTime(timestamp)})
-              </th>
-            </tr>
-            <tr>
-              <th
-                colSpan={
-                  1 +
-                  (state?.settings?.platform === 'win32' ? 1 : 0) +
-                  Object.keys(config.heroes.mapsPath).length
-                }
-              >
-                <div style={{ display: 'flex' }}>
-                  <div style={{ alignSelf: 'center' }}>Filter:</div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div>Filter:</div>
                   <div style={{ marginLeft: '20px' }}>
                     <Form.Control
                       type="text"
@@ -112,6 +99,15 @@ export default function MapTable() {
                       value={filterText}
                       onChange={(e) => setFilterText(e.target.value)}
                     />
+                  </div>
+                  <div style={{ marginLeft: 'auto' }}>
+                    <code>
+                      Latest Commit:{' '}
+                      <ElectronLink href={htmlUrl}>
+                        {commitMessage}
+                      </ElectronLink>{' '}
+                      ({getRelativeTime(timestamp)})
+                    </code>
                   </div>
                 </div>
               </th>
