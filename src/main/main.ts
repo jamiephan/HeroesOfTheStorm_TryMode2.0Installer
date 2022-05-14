@@ -329,7 +329,11 @@ const createWindow = async () => {
     platform: process.platform,
   };
 
-  settings.setSync({ ...defaultSettings, ...(await settings.get()) });
+  settings.setSync({
+    ...defaultSettings,
+    ...(await settings.get()),
+    activeStormmapGeneratorWindow: [],
+  });
 
   mainWindow = new BrowserWindow({
     show: true,
