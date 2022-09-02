@@ -11,7 +11,7 @@ export default function Main() {
   const { state } = useContext(GlobalContext);
 
   return (
-    <div style={{ paddingTop: '80px' }}>
+    <div style={{ paddingTop: '80px' }} className="mainBody">
       {/* <h1>{state?.settings?.appName}</h1>
       <p>
         <span>Thank you~~</span>
