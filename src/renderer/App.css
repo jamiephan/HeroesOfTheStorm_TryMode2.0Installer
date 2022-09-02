@@ -11,6 +11,30 @@ body {
   min-height: 100%;
 }
 
+.mainBody::before,
+.mainBody::after {
+  content: "";
+  z-index: -100000000;
+  position: fixed;
+  top: 0;
+  background-size: cover !important;
+  bottom: 0;
+  background: url("../../assets/heroes-side.png") no-repeat;
+  /* height: 100%; */
+  width: 250px;
+  display: block;
+}
+
+.mainBody::before {
+  left: 0;
+}
+
+.mainBody::after {
+  right: 0;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
 .navbar {
   position: fixed;
   z-index: 999;

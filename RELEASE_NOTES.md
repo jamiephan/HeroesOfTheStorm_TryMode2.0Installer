@@ -1,5 +1,5 @@
-- Added a filter functionality to search Try Mode 2.0 Maps
-- Updated "Last Commit" Message style
-- Added a similar background color when launching and loading Storm Map Generator 
-- Updated Run / Install Button colors
-- Fixed a bug that cause storm map generator not able to launch if the previous installer was closed while opening the generator
+- Updated App Icon to a green shade of Heroes of the Storm icon!
+- Updated Installer art style with some background image!
+- Shorten the taskbar title to only show "Try Mode 2.0 Installer"
+- Main window can no longer be smaller than 768px
+- Minor update to README
