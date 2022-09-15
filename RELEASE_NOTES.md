@@ -1,5 +1,1 @@
-- Updated App Icon to a green shade of Heroes of the Storm icon!
-- Updated Installer art style with some background image!
-- Shorten the taskbar title to only show "Try Mode 2.0 Installer"
-- Main window can no longer be smaller than 768px
-- Minor update to README
+- Update stormmap generator link to new https://stormmap.jamiephan.net
