@@ -74,7 +74,7 @@ const validateSettings = async () => {
           )
         ).isFile();
         if (isValid) newInstalledMaps.push(map);
-      } catch (e) {}
+      } catch (e) { }
     });
   }
 
@@ -189,7 +189,7 @@ ipcMain.on('open-storm-map-generator', async (event, cfg) => {
   );
 
   await stormWindows[cfg.name].loadURL(
-    `https://stormmap.herokuapp.com/?type=INSTALLER&mapName=${cfg.name}`
+    `https://stormmap.jamiephan.net/?type=INSTALLER&mapName=${cfg.name}`
   );
   stormWindows[cfg.name].focus();
 });
@@ -392,7 +392,7 @@ app.on('window-all-closed', () => {
   tempMapsToCleanUp.forEach((tempMapPath) => {
     try {
       fs.unlinkSync(tempMapPath);
-    } catch (e) {}
+    } catch (e) { }
   });
 
   // Respect the OSX convention of having the application in memory even

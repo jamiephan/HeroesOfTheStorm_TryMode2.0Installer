@@ -10,9 +10,9 @@ A Simple Installer for [Heroes of the Storm - Try Mode 2.0](https://jamiephan.gi
   - This allows you to run the custom map by launching the mode in game
   - Currently, There are two main source of custom maps:
     - [Try Mode 2.0](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0/releases/latest)
-    - [Storm Map Generator](https://stormmap.herokuapp.com/) Integration
+    - [Storm Map Generator](https://stormmap.jamiephan.net/) Integration
       - You can use it to get [official maps](https://github.com/jamiephan/HeroesOfTheStorm_S2MA), [maps with AI Patch](https://github.com/jamiephan/HeroesOfTheStorm_AIMapshttps://github.com/jamiephan/HeroesOfTheStorm_AIMaps) and can customize the map data yourself.
-      - For more details, please refer to the [Storm Map Generator](https://stormmap.herokuapp.com/) website or check out the [Storm Map Generator](https://github.com/jamiephan/HeroesOfTheStorm_StormMapGenerator) repo.
+      - For more details, please refer to the [Storm Map Generator](https://stormmap.jamiephan.net/) website or check out the [Storm Map Generator](https://github.com/jamiephan/HeroesOfTheStorm_StormMapGenerator) repo.
 - Launch the maps directly without needing to install / override the current map.
 
 
@@ -48,7 +48,7 @@ npm run package
  - [x] ([ALPHA](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/tree/ALPHA)) Overhaul the architecture (right now is just a quick draft)
  - [x] ([ALPHA](https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer/tree/ALPHA)) Make the UI more beautiful
  - [x] Allow to run the map directly without overriding local map
- - [x] Integrate [Storm Map Generator](https://stormmap.herokuapp.com/)
+ - [x] Integrate [Storm Map Generator](https://stormmap.jamiephan.net/)
  - [x] Add a filter/search functionality for map list
  - [ ] Add Linux/MacOS Support and Binary Build
  - [x] Icon for the Installer. (For now is Heroes's Icon)
