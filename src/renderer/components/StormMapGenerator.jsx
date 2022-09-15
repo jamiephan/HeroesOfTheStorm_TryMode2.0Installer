@@ -13,7 +13,7 @@ export default function StormMapGenerator() {
       <Alert>
         <p>
           This section allows you to generate your custom map from{' '}
-          <ElectronLink href="https://stormmap.herokuapp.com/">
+          <ElectronLink href="https://stormmap.jamiephan.net/">
             Storm Map Generator
           </ElectronLink>{' '}
           (
