@@ -1,1 +1,5 @@
-- Update stormmap generator link to new https://stormmap.jamiephan.net
+- Added the ability to run the installed maps
+  - Unlike the uninstalled maps, since the game has determined the path of the map file, it will behave like you launch it in game, such as having talent selection, able to skip cutscenes, etc.
+  - The cause of this behavior is currently unknown.
+- Updated Map Installation description box content
+  - Will now be dynamically generated from `config.js`
