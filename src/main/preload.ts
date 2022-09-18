@@ -26,6 +26,9 @@ contextBridge.exposeInMainWorld('electron', {
     deleteInstalledMap(map: string) {
       ipcRenderer.send('delete-installed-map', map);
     },
+    runInstalledMap(map: string) {
+      ipcRenderer.send('run-installed-map', map);
+    },
     openStormMapGenerator(config: Object) {
       ipcRenderer.send('open-storm-map-generator', config);
     },
