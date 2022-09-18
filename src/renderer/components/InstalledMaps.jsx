@@ -11,12 +11,12 @@ export default function InstalledMaps() {
     },
   } = useContext(GlobalContext);
   return (
-    <Table style={{maxWidth: "50%"}}>
+    <Table style={{ maxWidth: '50%' }}>
       <thead>
         <tr>
           <th>Name</th>
           {/* <th>Path</th> */}
-          <th>Action</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -33,7 +33,14 @@ export default function InstalledMaps() {
               </td> */}
               <td>
                 <Button
-                variant="danger"
+                  variant="secondary"
+                  onClick={() => dispatch({ type: 'RUN_INSTALLED_MAP', map })}
+                >
+                  Run
+                </Button>
+                <Button
+                  variant="danger"
+                  style={{ marginLeft: '20px' }}
                   onClick={() =>
                     dispatch({ type: 'DELETE_INSTALLED_MAP', map })
                   }

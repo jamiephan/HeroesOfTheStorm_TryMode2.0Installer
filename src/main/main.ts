@@ -22,6 +22,7 @@ import {
   validateHeroesPath,
   installOnlineMap,
   runOnlineMap,
+  runInstalledMap,
 } from './util';
 
 export default class AppUpdater {
@@ -74,7 +75,7 @@ const validateSettings = async () => {
           )
         ).isFile();
         if (isValid) newInstalledMaps.push(map);
-      } catch (e) { }
+      } catch (e) {}
     });
   }
 
@@ -213,6 +214,15 @@ ipcMain.on('delete-installed-map', async (event, map) => {
 
   await validateSettings();
   event.reply('get-settings', await settings.get());
+});
+
+ipcMain.on('run-installed-map', async (event, map) => {
+  // Run the map
+  const heroesPath = await settings.get('heroesPath');
+  const result = runInstalledMap(map, heroesPath);
+  if (!result.success) {
+    event.reply('electron-ipc-error', result.message);
+  }
 });
 
 ipcMain.on('get-settings', async (event) => {
@@ -392,7 +402,7 @@ app.on('window-all-closed', () => {
   tempMapsToCleanUp.forEach((tempMapPath) => {
     try {
       fs.unlinkSync(tempMapPath);
-    } catch (e) { }
+    } catch (e) {}
   });
 
   // Respect the OSX convention of having the application in memory even

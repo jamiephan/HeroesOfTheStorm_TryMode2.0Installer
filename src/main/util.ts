@@ -5,6 +5,7 @@ import axios from 'axios';
 import fs from 'fs';
 import tmp from 'tmp';
 import child_process from 'child_process';
+import mapConfig from '../../config';
 
 export let resolveHtmlPath: (htmlFileName: string) => string;
 
@@ -158,6 +159,34 @@ export const installOnlineMap = async (
     message: result.success
       ? `${config.downloadPrettyName} have been successfully installed. Please launch ${config.name} in the game to use the map.`
       : result.error.message,
+  };
+};
+
+export const runInstalledMap = (map: string, heroesPath: string): Object => {
+  const mapObj = mapConfig.heroes.mapsPath[map];
+
+  try {
+    if (process.platform === 'win32') {
+      child_process.execSync(
+        `"${heroesPath}/Support64/HeroesSwitcher_x64.exe" "${mapObj.path.replace(
+          '/maps/',
+          ''
+        )}/${mapObj.file}"`
+      );
+      return {
+        success: true,
+        message: `${mapObj.name} have been launched.`,
+      };
+    }
+  } catch (e) {
+    return {
+      success: false,
+      message: e.message,
+    };
+  }
+  return {
+    success: false,
+    message: `Unsupported Platform to run the map directly.`,
   };
 };
 
