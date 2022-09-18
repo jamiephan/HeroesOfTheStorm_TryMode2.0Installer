@@ -1,6 +1,7 @@
 import React from 'react';
 import { Alert } from 'react-bootstrap';
 import ElectronLink from './shared/ElectronLink';
+import config from '../../../config';
 
 export default function MapTableHelp() {
   return (
@@ -23,25 +24,23 @@ export default function MapTableHelp() {
           players).
         </p>
         <ul>
-          <li>
-            <code>Try Mode</code>: The map can be launched When entering Try
-            Mode in Heroes of the Storm.
-          </li>
-          <li>
-            <code>Tutorial: Beginner</code>: The map can be launched via In
-            Game: &nbsp;
-            <code>Settings -&gt; Tutorial -&gt; Introduction</code>
-          </li>
-          <li>
-            <code>Tutorial: Map Mechanic</code>: The map can be launched via In:
-            &nbsp;
-            <code>Game Settings -&gt; Tutorial -&gt; Basic</code>
-          </li>
-          <li>
-            <code>Tutorial: Veteran</code>: The map can be launched via In Game:
-            &nbsp;
-            <code>Settings -&gt; Tutorial -&gt; Advanced</code>
-          </li>
+          {/* config.heroes.mapsPath */}
+          {Object.keys(config.heroes.mapsPath).map((v) => {
+            const obj = config.heroes.mapsPath[v];
+            return (
+              <li key={v}>
+                <code>{obj.name}</code>: {obj.description.text}{' '}
+                {obj.description.inGamePath && (
+                  <ul>
+                    <li>
+                      The map can be launched in game via: &nbsp;
+                      <code>{obj.description.inGamePath.join(' -> ')}</code>
+                    </li>
+                  </ul>
+                )}
+              </li>
+            );
+          })}
         </ul>
         <p>
           You can also click on &quot;Run&quot; to run the map directly without
