@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Button, ButtonGroup, Table } from 'react-bootstrap';
 import config from '../../../config';
 import GlobalContext from '../context/GlobalContext';
 
@@ -32,21 +32,37 @@ export default function InstalledMaps() {
                 </code>
               </td> */}
               <td>
-                <Button
-                  variant="secondary"
-                  onClick={() => dispatch({ type: 'RUN_INSTALLED_MAP', map })}
-                >
-                  Run
-                </Button>
-                <Button
-                  variant="danger"
-                  style={{ marginLeft: '20px' }}
-                  onClick={() =>
-                    dispatch({ type: 'DELETE_INSTALLED_MAP', map })
-                  }
-                >
-                  Delete
-                </Button>
+                <ButtonGroup>
+                  <Button
+                    variant="secondary"
+                    onClick={() => dispatch({ type: 'RUN_INSTALLED_MAP', map })}
+                  >
+                    Run
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      dispatch({ type: 'OPEN_INSTALLED_MAP', map });
+                    }}
+                  >
+                    Locate
+                  </Button>
+                  <Button
+                    variant="danger"
+                    onClick={() =>
+                      dispatch({
+                        type: 'SHOW_DIALOG',
+                        title: `Confirm delete custom ${config.heroes.mapsPath[map].name}?`,
+                        withYesNo: true,
+                        message: `Are you sure you want to delete the custom installed ${config.heroes.mapsPath[map].name}? This will revert to the default in game map.`,
+                        callback: () => {
+                          dispatch({ type: 'DELETE_INSTALLED_MAP', map });
+                        },
+                      })
+                    }
+                  >
+                    Delete
+                  </Button>
+                </ButtonGroup>
               </td>
             </tr>
           ))}

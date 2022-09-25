@@ -216,6 +216,19 @@ ipcMain.on('delete-installed-map', async (event, map) => {
   event.reply('get-settings', await settings.get());
 });
 
+ipcMain.on('open-installed-map', async (event, map) => {
+  await validateSettings();
+  const heroesPath = await settings.get('heroesPath');
+
+  // Open the map
+  try {
+    const mapPath = `${heroesPath}/${config.heroes.mapsPath[map].path}/${config.heroes.mapsPath[map].file}`;
+    shell.showItemInFolder(path.normalize(mapPath));
+  } catch (e) {
+    event.reply('electron-ipc-error', e.message);
+  }
+});
+
 ipcMain.on('run-installed-map', async (event, map) => {
   // Run the map
   const heroesPath = await settings.get('heroesPath');

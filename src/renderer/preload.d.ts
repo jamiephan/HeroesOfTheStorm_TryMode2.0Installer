@@ -10,6 +10,7 @@ declare global {
         runMap(settings: Object): void;
         openFolder(path: string): void;
         deleteInstalledMap(map: string): void;
+        openInstalledMap(map: string): void;
         runInstalledMap(map: string): void;
         openStormMapGenerator(config: Object): void;
         closeStormMapGenerator(config: Object): void;
