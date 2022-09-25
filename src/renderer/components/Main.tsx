@@ -18,12 +18,12 @@ export default function Main() {
           {state?.settings?.installedMaps &&
             state?.settings?.installedMaps.length > 0 && (
               <>
-                <h3>Overrode Maps:</h3>
+                <h3>Installed Maps:</h3>
                 <InstalledMaps />
               </>
             )}
           {state?.settings?.showStormMapGenerator && <StormMapGenerator />}
-          <h3>Map Installation:</h3>
+          <h3>Download / Install:</h3>
           {state?.settings?.showMapInstallDescription && <MapTableHelp />}
           <MapTable />
         </>
