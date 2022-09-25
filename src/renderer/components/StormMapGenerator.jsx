@@ -43,12 +43,30 @@ export default function StormMapGenerator() {
                 ) ? (
                   <Button
                     variant="primary"
-                    onClick={() =>
-                      dispatch({
-                        type: 'OPEN_STORMMAP_GENERATOR',
-                        config: config.heroes.mapsPath[mapName],
-                      })
-                    }
+                    onClick={() => {
+                      const installFn = () =>
+                        dispatch({
+                          type: 'OPEN_STORMMAP_GENERATOR',
+                          config: config.heroes.mapsPath[mapName],
+                        });
+
+                      if (
+                        state.settings.installedMaps.includes(mapName) &&
+                        state?.settings?.showConfirmDeletedMap
+                      ) {
+                        dispatch({
+                          type: 'SHOW_DIALOG',
+                          title: `Confirm override custom ${config.heroes.mapsPath[mapName].name}?`,
+                          withYesNo: true,
+                          message: `Seems you have a custom ${config.heroes.mapsPath[mapName].name} map. Launching Storm Map Generator and generate a map file will override the existing one. Do you wish to continue?`,
+                          callback: () => {
+                            installFn();
+                          },
+                        });
+                      } else {
+                        installFn();
+                      }
+                    }}
                   >
                     Launch
                   </Button>

@@ -7,7 +7,7 @@ export default function InstalledMaps() {
   const {
     dispatch,
     state: {
-      settings: { installedMaps },
+      settings: { installedMaps, showConfirmDeletedMap },
     },
   } = useContext(GlobalContext);
   return (
@@ -48,17 +48,21 @@ export default function InstalledMaps() {
                   </Button>
                   <Button
                     variant="danger"
-                    onClick={() =>
-                      dispatch({
-                        type: 'SHOW_DIALOG',
-                        title: `Confirm delete custom ${config.heroes.mapsPath[map].name}?`,
-                        withYesNo: true,
-                        message: `Are you sure you want to delete the custom installed ${config.heroes.mapsPath[map].name}? This will revert to the default in game map.`,
-                        callback: () => {
-                          dispatch({ type: 'DELETE_INSTALLED_MAP', map });
-                        },
-                      })
-                    }
+                    onClick={() => {
+                      if (showConfirmDeletedMap) {
+                        dispatch({
+                          type: 'SHOW_DIALOG',
+                          title: `Confirm delete custom ${config.heroes.mapsPath[map].name}?`,
+                          withYesNo: true,
+                          message: `Are you sure you want to delete the custom installed ${config.heroes.mapsPath[map].name}? This will revert to the default in game map.`,
+                          callback: () => {
+                            dispatch({ type: 'DELETE_INSTALLED_MAP', map });
+                          },
+                        });
+                      } else {
+                        dispatch({ type: 'DELETE_INSTALLED_MAP', map });
+                      }
+                    }}
                   >
                     Delete
                   </Button>

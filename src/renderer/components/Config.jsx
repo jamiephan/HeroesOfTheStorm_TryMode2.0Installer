@@ -46,6 +46,11 @@ export default function Config() {
             description="Show the description box in the Map Install section."
             settingKey="showMapInstallDescription"
           />
+          {/* showConfirmDeletedMap */}
+          <ConfigEntry
+            description="Shows a Confirm Dialog before delete/overriding current local maps."
+            settingKey="showConfirmDeletedMap"
+          />
           {/* showStormMapGenerator */}
           <ConfigEntry
             description="Show the Storm Map Generator Config Section."

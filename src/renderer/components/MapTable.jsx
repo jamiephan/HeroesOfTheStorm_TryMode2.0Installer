@@ -178,25 +178,42 @@ export default function MapTable() {
                     <Button
                       variant="primary"
                       disabled={state?.isInstallingMap}
-                      onClick={() =>
-                        dispatch({
-                          type: 'INSTALL_MAP',
-                          config: {
-                            downloadLink: asset.browser_download_url,
-                            ...config.heroes.mapsPath[mapName],
-                            downloadName: asset.name,
-                            downloadPrettyName:
-                              asset.name
-                                .replace('.stormmap', '')
-                                .replace('.s', "'s")
-                                .replace('.AI', '')
-                                .replace(/\./g, ' ') +
-                              (asset.name.endsWith('.AI.stormmap')
-                                ? ' (AI)'
-                                : ''),
-                          },
-                        })
-                      }
+                      onClick={() => {
+                        const installFn = () =>
+                          dispatch({
+                            type: 'INSTALL_MAP',
+                            config: {
+                              downloadLink: asset.browser_download_url,
+                              ...config.heroes.mapsPath[mapName],
+                              downloadName: asset.name,
+                              downloadPrettyName:
+                                asset.name
+                                  .replace('.stormmap', '')
+                                  .replace('.s', "'s")
+                                  .replace('.AI', '')
+                                  .replace(/\./g, ' ') +
+                                (asset.name.endsWith('.AI.stormmap')
+                                  ? ' (AI)'
+                                  : ''),
+                            },
+                          });
+                        if (
+                          state.settings.installedMaps.includes(mapName) &&
+                          state?.settings?.showConfirmDeletedMap
+                        ) {
+                          dispatch({
+                            type: 'SHOW_DIALOG',
+                            title: `Confirm override custom ${config.heroes.mapsPath[mapName].name}?`,
+                            withYesNo: true,
+                            message: `Are you sure you want to override the custom installed ${config.heroes.mapsPath[mapName].name}?`,
+                            callback: () => {
+                              installFn();
+                            },
+                          });
+                        } else {
+                          installFn();
+                        }
+                      }}
                     >
                       Install
                     </Button>
