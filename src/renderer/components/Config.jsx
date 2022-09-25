@@ -9,7 +9,6 @@ export default function Config() {
 
   return (
     <>
-      <h3>Configuration:</h3>
       <Table>
         <thead>
           <tr>
@@ -36,28 +35,54 @@ export default function Config() {
               },
             ]}
           />
-          {/* skipHeroesPathCheck */}
-          <ConfigEntry
-            description="Skip the check for selecting Heroes of the Storm Path."
-            settingKey="skipHeroesPathCheck"
-          />
-          {/* showMapInstallDescription */}
-          <ConfigEntry
-            description="Show the description box in the Map Install section."
-            settingKey="showMapInstallDescription"
-          />
-          {/* showConfirmDeletedMap */}
-          <ConfigEntry
-            description="Shows a Confirm Dialog before delete/overriding current local maps."
-            settingKey="showConfirmDeletedMap"
-          />
           {/* showStormMapGenerator */}
           <ConfigEntry
             description="Show the Storm Map Generator Config Section."
             settingKey="showStormMapGenerator"
           />
+          {/* More Settings... */}
+          {state?.settings?.showMoreSettings && (
+            <>
+              {/* skipHeroesPathCheck */}
+              <ConfigEntry
+                description="Skip the check for selecting Heroes of the Storm Path."
+                settingKey="skipHeroesPathCheck"
+              />
+              {/* showMapInstallDescription */}
+              <ConfigEntry
+                description="Show the description box in the Storm Map Generator section."
+                settingKey="showStormMapGeneratorDescription"
+              />
+              {/* showMapInstallDescription */}
+              <ConfigEntry
+                description="Show the description box in the Map Install section."
+                settingKey="showMapInstallDescription"
+              />
+              {/* showConfirmDeletedMap */}
+              <ConfigEntry
+                description="Shows a Confirm Dialog before delete/overriding current local maps."
+                settingKey="showConfirmDeletedMap"
+              />
+            </>
+          )}
         </tbody>
       </Table>
+
+      {/* Show More */}
+      <div style={{ overflow: 'auto' }}>
+        <Button
+          variant="secondary"
+          style={{ float: 'right' }}
+          onClick={() =>
+            dispatch({
+              type: 'SET_SETTINGS',
+              showMoreSettings: !state?.settings?.showMoreSettings,
+            })
+          }
+        >
+          {state?.settings?.showMoreSettings ? 'Less' : 'More'} Options
+        </Button>
+      </div>
     </>
   );
 }

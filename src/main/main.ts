@@ -346,12 +346,14 @@ const createWindow = async () => {
   const defaultSettings = {
     appName: 'Try Mode 2.0 Installer',
     heroesPath: await getHeroesPath(),
+    showStormMapGenerator: false,
+    showMoreSettings: false,
     skipHeroesPathCheck: false,
+    showStormMapGeneratorDescription: true,
     showMapInstallDescription: true,
     showConfirmDeletedMap: true,
     installedMaps: [],
     activeStormmapGeneratorWindow: [],
-    showStormMapGenerator: false,
     platform: process.platform,
     mapFilterText: '',
   };

@@ -12,6 +12,7 @@ export default function Main() {
 
   return (
     <div style={{ paddingTop: '80px' }} className="mainBody">
+      <h3>Configuration:</h3>
       <Config />
       {state?.settings?.heroesPath && (
         <>

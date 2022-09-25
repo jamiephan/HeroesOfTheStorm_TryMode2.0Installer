@@ -10,20 +10,22 @@ export default function StormMapGenerator() {
   return (
     <>
       <h3>Storm Map Generator:</h3>
-      <Alert>
-        <p>
-          This section allows you to generate your custom map from{' '}
-          <ElectronLink href="https://stormmap.jamiephan.net/">
-            Storm Map Generator
-          </ElectronLink>{' '}
-          (
-          <ElectronLink href="https://github.com/jamiephan/HeroesOfTheStorm_StormMapGenerator">
-            Source Code
-          </ElectronLink>
-          ) and install it directly to the game modes without manually download
-          and install it.
-        </p>
-      </Alert>
+      {state?.settings?.showStormMapGeneratorDescription && (
+        <Alert>
+          <p>
+            This section allows you to generate your custom map from{' '}
+            <ElectronLink href="https://stormmap.jamiephan.net/">
+              Storm Map Generator
+            </ElectronLink>{' '}
+            (
+            <ElectronLink href="https://github.com/jamiephan/HeroesOfTheStorm_StormMapGenerator">
+              Source Code
+            </ElectronLink>
+            ) and install it directly to the game modes without manually
+            download and install it.
+          </p>
+        </Alert>
+      )}
       <Table bordered>
         <thead style={{ position: 'sticky' }}>
           <tr>
