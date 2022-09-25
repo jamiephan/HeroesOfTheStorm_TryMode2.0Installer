@@ -46,7 +46,7 @@ module.exports = {
         file: 'tutorialveteran.stormmap',
         description: {
           text: 'Veteran Introduction.',
-          inGamePath: ['Settings', 'Challenges', 'Veteran Intoduction'],
+          inGamePath: ['Settings', 'Challenges', 'Veteran Introduction'],
         },
       },
     },
