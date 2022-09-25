@@ -12,12 +12,7 @@ export default function Main() {
 
   return (
     <div style={{ paddingTop: '80px' }} className="mainBody">
-      {/* <h1>{state?.settings?.appName}</h1>
-      <p>
-        <span>Thank you~~</span>
-      </p> */}
       <Config />
-      {/* <Button onClick={handleClick}>Click</Button> */}
       {state?.settings?.heroesPath && (
         <>
           {state?.settings?.installedMaps &&
