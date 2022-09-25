@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Button, Table } from 'react-bootstrap';
 
 import GlobalContext from '../context/GlobalContext';
+import ConfigEntry from './shared/ConfigEntry';
 
 export default function Config() {
   const { state, dispatch } = useContext(GlobalContext);
@@ -13,78 +14,43 @@ export default function Config() {
         <thead>
           <tr>
             <th>Key</th>
-            <th>Value</th>
             <th>Description</th>
+            <th>Value</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>heroesPath</td>
-            <td>
-              <code>{state?.settings?.heroesPath || 'null'}</code>
-            </td>
-            <td>
-              The path of Heroes of the Storm. <b>(Required*)</b>
-            </td>
-            <td>
-              <Button
-                onClick={() =>
-                  dispatch({ type: 'OPEN_ELECTRON_HEROES_INSTALL_DIALOG' })
-                }
-              >
-                Modify
-              </Button>
-            </td>
-          </tr>
-          <tr>
-            <td>skipHeroesPathCheck</td>
-            <td>
-              <code>
-                {state?.settings?.skipHeroesPathCheck ? 'true' : 'false'}
-              </code>
-            </td>
-            <td>
-              Skip the check for selecting Heroes of the Storm Path.{' '}
-              <b>(Optional)</b>
-            </td>
-            <td>
-              <Button
-                onClick={() =>
+          {/* heroesPath */}
+          <ConfigEntry
+            description="The path of Heroes of the Storm."
+            settingKey="heroesPath"
+            required
+            type="custom"
+            customActions={[
+              {
+                text: 'Modify',
+                action: () =>
                   dispatch({
-                    type: 'SET_SETTINGS',
-                    skipHeroesPathCheck: !state?.settings?.skipHeroesPathCheck,
-                  })
-                }
-              >
-                Toggle
-              </Button>
-            </td>
-          </tr>
-          <tr>
-            <td>showStormMapGenerator</td>
-            <td>
-              <code>
-                {state?.settings?.showStormMapGenerator ? 'true' : 'false'}
-              </code>
-            </td>
-            <td>
-              Show the Storm Map Generator Config Section. <b>(Optional)</b>
-            </td>
-            <td>
-              <Button
-                onClick={() =>
-                  dispatch({
-                    type: 'SET_SETTINGS',
-                    showStormMapGenerator:
-                      !state?.settings?.showStormMapGenerator,
-                  })
-                }
-              >
-                Toggle
-              </Button>
-            </td>
-          </tr>
+                    type: 'OPEN_ELECTRON_HEROES_INSTALL_DIALOG',
+                  }),
+              },
+            ]}
+          />
+          {/* skipHeroesPathCheck */}
+          <ConfigEntry
+            description="Skip the check for selecting Heroes of the Storm Path."
+            settingKey="skipHeroesPathCheck"
+          />
+          {/* showMapInstallDescription */}
+          <ConfigEntry
+            description="Show the description box in the Map Install section."
+            settingKey="showMapInstallDescription"
+          />
+          {/* showStormMapGenerator */}
+          <ConfigEntry
+            description="Show the Storm Map Generator Config Section."
+            settingKey="showStormMapGenerator"
+          />
         </tbody>
       </Table>
     </>

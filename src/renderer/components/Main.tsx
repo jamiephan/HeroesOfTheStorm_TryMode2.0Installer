@@ -24,7 +24,7 @@ export default function Main() {
             )}
           {state?.settings?.showStormMapGenerator && <StormMapGenerator />}
           <h3>Map Installation:</h3>
-          <MapTableHelp />
+          {state?.settings?.showMapInstallDescription && <MapTableHelp />}
           <MapTable />
         </>
       )}
