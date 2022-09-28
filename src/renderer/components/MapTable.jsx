@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Button, Form, Table } from 'react-bootstrap';
 
+import MapTableHelp from './MapTableHelp';
 import config from '../../../config';
 import ElectronLink from './shared/ElectronLink';
 import GlobalContext from '../context/GlobalContext';
@@ -227,5 +228,10 @@ export default function MapTable() {
     );
   }
 
-  return html;
+  return (
+    <>
+      {state?.settings?.showMapInstallDescription && <MapTableHelp />}
+      {html}
+    </>
+  );
 }

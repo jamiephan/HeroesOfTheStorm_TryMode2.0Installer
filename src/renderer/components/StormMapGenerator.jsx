@@ -9,7 +9,6 @@ export default function StormMapGenerator() {
 
   return (
     <>
-      <h3>Storm Map Generator:</h3>
       {state?.settings?.showStormMapGeneratorDescription && (
         <Alert
           dismissible
