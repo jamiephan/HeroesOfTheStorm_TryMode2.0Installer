@@ -48,9 +48,9 @@ export default function Config() {
                 description="Skip the check for selecting Heroes of the Storm Path."
                 settingKey="skipHeroesPathCheck"
               />
-              {/* showMapInstallDescription */}
+              {/* showStormMapGeneratorDescription */}
               <ConfigEntry
-                description="Show the description box in the Storm Map Generator section."
+                description="Show the description box in the Storm Map Generator."
                 settingKey="showStormMapGeneratorDescription"
               />
               {/* showMapInstallDescription */}

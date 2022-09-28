@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Alert } from 'react-bootstrap';
+import GlobalContext from '../context/GlobalContext';
 import ElectronLink from './shared/ElectronLink';
 import config from '../../../config';
 
 export default function MapTableHelp() {
+  const { dispatch } = useContext(GlobalContext);
+
   return (
     <>
-      <Alert>
+      <Alert
+        dismissible
+        onClose={() =>
+          dispatch({
+            type: 'SET_SETTINGS',
+            showMapInstallDescription: false,
+          })
+        }
+      >
         <p>
           This section allows you to install the map from{' '}
           <ElectronLink href="https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0">

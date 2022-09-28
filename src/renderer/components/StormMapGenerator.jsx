@@ -11,7 +11,15 @@ export default function StormMapGenerator() {
     <>
       <h3>Storm Map Generator:</h3>
       {state?.settings?.showStormMapGeneratorDescription && (
-        <Alert>
+        <Alert
+          dismissible
+          onClose={() =>
+            dispatch({
+              type: 'SET_SETTINGS',
+              showStormMapGeneratorDescription: false,
+            })
+          }
+        >
           <p>
             This section allows you to generate your custom map from{' '}
             <ElectronLink href="https://stormmap.jamiephan.net/">
