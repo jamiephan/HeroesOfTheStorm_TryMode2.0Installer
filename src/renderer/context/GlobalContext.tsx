@@ -81,6 +81,11 @@ const GlobalReducer = (
         isInstallingMap: false,
         installMapConfig: {},
       };
+    case 'INSTALL_MAP_FROM_FILE':
+      window.electron.ipcRenderer.installMapFromFile(payload.config);
+      return {
+        ...state,
+      };
     case 'CLOSE_APP_WINDOW':
       window.electron.ipcRenderer.closeWindow();
       return {

@@ -23,6 +23,7 @@ import {
   installOnlineMap,
   runOnlineMap,
   runInstalledMap,
+  installMapFromFile,
 } from './util';
 
 export default class AppUpdater {
@@ -308,6 +309,21 @@ ipcMain.on('run-map', async (event, config) => {
     event.reply('electron-ipc-error', result.message);
   } else {
     tempMapsToCleanUp.push(result.tempMapPath);
+  }
+});
+
+ipcMain.on('install-map-from-file', async (event, config) => {
+  const heroesPath = await settings.get('heroesPath');
+
+  const result = await installMapFromFile(config, heroesPath);
+
+  await validateSettings();
+  event.reply('get-settings', await settings.get());
+
+  if (result.success) {
+    event.reply('electron-ipc-success', result.message);
+  } else {
+    event.reply('electron-ipc-error', result.message);
   }
 });
 

@@ -8,6 +8,7 @@ declare global {
         closeWindow(): void;
         installMap(settings: Object): void;
         runMap(settings: Object): void;
+        installMapFromFile(settings: Object): void;
         openFolder(path: string): void;
         deleteInstalledMap(map: string): void;
         openInstalledMap(map: string): void;

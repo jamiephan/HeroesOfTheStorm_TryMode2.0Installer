@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import GlobalContext from 'renderer/context/GlobalContext';
 import Config from './Config';
+import DrapAndDropArea from './DrapAndDropArea';
 import InstalledMaps from './InstalledMaps';
 import MapTable from './MapTable';
 import MapTableHelp from './MapTableHelp';
@@ -12,24 +13,32 @@ export default function Main() {
 
   return (
     <div style={{ paddingTop: '80px' }} className="mainBody">
-      <h3>Configuration:</h3>
-      <Config />
-      {state?.settings?.heroesPath && (
-        <>
-          {state?.settings?.installedMaps &&
-            state?.settings?.installedMaps.length > 0 && (
-              <>
-                <h3>Installed Maps:</h3>
-                <InstalledMaps />
-              </>
-            )}
-          {state?.settings?.showStormMapGenerator && <StormMapGenerator />}
-          <h3>Download / Install:</h3>
-          {state?.settings?.showMapInstallDescription && <MapTableHelp />}
-          <MapTable />
-        </>
-      )}
-      <AlertDialog />
+      <DrapAndDropArea
+        enabled={
+          state?.settings?.heroesPath &&
+          !state?.dialog?.show &&
+          !state?.isInstallingMap
+        }
+      >
+        <h3>Configuration:</h3>
+        <Config />
+        {state?.settings?.heroesPath && (
+          <>
+            {state?.settings?.installedMaps &&
+              state?.settings?.installedMaps.length > 0 && (
+                <>
+                  <h3>Installed Maps:</h3>
+                  <InstalledMaps />
+                </>
+              )}
+            {state?.settings?.showStormMapGenerator && <StormMapGenerator />}
+            <h3>Download / Install:</h3>
+            {state?.settings?.showMapInstallDescription && <MapTableHelp />}
+            <MapTable />
+          </>
+        )}
+        <AlertDialog />
+      </DrapAndDropArea>
     </div>
   );
 }
