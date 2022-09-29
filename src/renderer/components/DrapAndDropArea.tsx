@@ -120,12 +120,12 @@ export default function DrapAndDropArea({
                       }`}
                     >
                       <input {...getInputPropsChild()} />
-                      <span>
+                      <h5>
                         {config.heroes.mapsPath[map].name}{' '}
                         {state?.settings?.installedMaps?.includes(map) && (
                           <code>(override*)</code>
                         )}
-                      </span>
+                      </h5>
                     </div>
                   )}
                 </Dropzone>
