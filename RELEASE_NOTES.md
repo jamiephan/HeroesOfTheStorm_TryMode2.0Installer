@@ -1,5 +1,16 @@
-- Added the ability to run the installed maps
-  - Unlike the uninstalled maps, since the game has determined the path of the map file, it will behave like you launch it in game, such as having talent selection, able to skip cutscenes, etc.
-  - The cause of this behavior is currently unknown.
-- Updated Map Installation description box content
-  - Will now be dynamically generated from `config.js`
+- **Configuration**
+  - Added `showConfirmDeleteMap` settings to show a confirm dialog when overriding a installed custom map
+  - Added `showStormMapGeneratorDescription` settings to control whether to show the Storm Map Generator description dialog
+  - Added `showMapInstallDescription` settings to control whether to show the map description dialog
+  - Added a button to show more options. Most settings will now be hidden by default from preventing visual clutter.
+- **Installed Maps**
+  - Added "Locate" button to each install maps: when clicked, it will show the file in Explorer.
+- **Storm Map Generator & Map Table**
+  - Updated section title
+  - Added a close button to the description message. You can show the message again from Settings
+- **NEW - Drag and Drop to install**:
+  - Added a Drag and Drop functionality to install any custom stormmaps!
+  - When dragging a map file to the installer, a new overlay allow you to drop the file to install onto one of the local maps
+  - You can only drag `.stormmap` or `.sc2map` into it.
+  - Demo:
+  - ![Drag and Drop demo](https://i.imgur.com/q9oUQGb.gif)

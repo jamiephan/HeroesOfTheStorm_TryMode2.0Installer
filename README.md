@@ -14,6 +14,7 @@ A Simple Installer for [Heroes of the Storm - Try Mode 2.0](https://jamiephan.gi
       - You can use it to get [official maps](https://github.com/jamiephan/HeroesOfTheStorm_S2MA), [maps with AI Patch](https://github.com/jamiephan/HeroesOfTheStorm_AIMapshttps://github.com/jamiephan/HeroesOfTheStorm_AIMaps) and can customize the map data yourself.
       - For more details, please refer to the [Storm Map Generator](https://stormmap.jamiephan.net/) website or check out the [Storm Map Generator](https://github.com/jamiephan/HeroesOfTheStorm_StormMapGenerator) repo.
 - Launch the maps directly without needing to install / override the current map.
+- Drag and Drop any map files to install and run it
 
 
 ## Installation:
@@ -52,9 +53,11 @@ npm run package
  - [x] Add a filter/search functionality for map list
  - [ ] Add Linux/MacOS Support and Binary Build
  - [x] Icon for the Installer. (For now is Heroes's Icon)
- - [ ] Allows to run any `*.stormmap` directly
- - [ ] Allows to use any `*.stormmap`
+ - [x] Allows to use any `*.stormmap`
  - [ ] `*.stormmod` management (via `/mods`)
+ - [ ] Allow to refresh map list
+ - [ ] Allow to traverse map list versions
+ - [ ] Allow to export and save the maps (including storm map generator) 
 
 
 ## Screenshots:
