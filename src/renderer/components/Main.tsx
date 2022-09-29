@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import GlobalContext from 'renderer/context/GlobalContext';
 import Config from './Config';
+import DrapAndDropArea from './DrapAndDropArea';
 import InstalledMaps from './InstalledMaps';
 import MapTable from './MapTable';
-import MapTableHelp from './MapTableHelp';
 import AlertDialog from './shared/AlertDialog';
 import StormMapGenerator from './StormMapGenerator';
 
@@ -12,28 +12,36 @@ export default function Main() {
 
   return (
     <div style={{ paddingTop: '80px' }} className="mainBody">
-      {/* <h1>{state?.settings?.appName}</h1>
-      <p>
-        <span>Thank you~~</span>
-      </p> */}
-      <Config />
-      {/* <Button onClick={handleClick}>Click</Button> */}
-      {state?.settings?.heroesPath && (
-        <>
-          {state?.settings?.installedMaps &&
-            state?.settings?.installedMaps.length > 0 && (
+      <DrapAndDropArea
+        enabled={
+          state?.settings?.heroesPath &&
+          !state?.dialog?.show &&
+          !state?.isInstallingMap
+        }
+      >
+        <h3>Configuration</h3>
+        <Config />
+        {state?.settings?.heroesPath && (
+          <>
+            {state?.settings?.installedMaps &&
+              state?.settings?.installedMaps.length > 0 && (
+                <>
+                  <h3>Installed Maps</h3>
+                  <InstalledMaps />
+                </>
+              )}
+            {state?.settings?.showStormMapGenerator && (
               <>
-                <h3>Overrode Maps:</h3>
-                <InstalledMaps />
+                <h3>Storm Map Generator</h3>
+                <StormMapGenerator />
               </>
             )}
-          {state?.settings?.showStormMapGenerator && <StormMapGenerator />}
-          <h3>Map Installation:</h3>
-          <MapTableHelp />
-          <MapTable />
-        </>
-      )}
-      <AlertDialog />
+            <h3>Download / Install</h3>
+            <MapTable />
+          </>
+        )}
+        <AlertDialog />
+      </DrapAndDropArea>
     </div>
   );
 }

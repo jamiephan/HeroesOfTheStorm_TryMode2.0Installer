@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const GlobalReducer = (
@@ -42,6 +42,7 @@ const GlobalReducer = (
         ...state,
         dialog: {
           show: true,
+          withYesNo: payload?.withYesNo,
           message: payload.message,
           title: payload.title,
           callback: payload?.callback || (() => {}),
@@ -49,11 +50,14 @@ const GlobalReducer = (
       };
     case 'HIDE_DIALOG':
       // eslint-disable-next-line react/destructuring-assignment
-      state.dialog.callback();
+      if (!payload?.noCallback) {
+        state?.dialog?.callback();
+      }
       return {
         ...state,
         dialog: {
           show: false,
+          withYesNo: false,
           message: null,
           title: null,
           callback: null,
@@ -77,6 +81,11 @@ const GlobalReducer = (
         isInstallingMap: false,
         installMapConfig: {},
       };
+    case 'INSTALL_MAP_FROM_FILE':
+      window.electron.ipcRenderer.installMapFromFile(payload.config);
+      return {
+        ...state,
+      };
     case 'CLOSE_APP_WINDOW':
       window.electron.ipcRenderer.closeWindow();
       return {
@@ -94,6 +103,11 @@ const GlobalReducer = (
       };
     case 'DELETE_INSTALLED_MAP':
       window.electron.ipcRenderer.deleteInstalledMap(payload.map);
+      return {
+        ...state,
+      };
+    case 'OPEN_INSTALLED_MAP':
+      window.electron.ipcRenderer.openInstalledMap(payload.map);
       return {
         ...state,
       };

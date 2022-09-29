@@ -162,6 +162,37 @@ export const installOnlineMap = async (
   };
 };
 
+export const installMapFromFile = async (
+  config: object,
+  heroesPath: string
+): Promise<object> => {
+  try {
+    console.log(`Copying ${config.filePath}...`);
+
+    const folder = `${heroesPath}/${config.map.path}`;
+
+    // If target folder exist
+    if (!fs.existsSync(folder)) {
+      fs.mkdirSync(folder, {
+        recursive: true,
+      });
+    }
+
+    // Save to file
+    fs.writeFileSync(
+      `${folder}/${config.map.file}`,
+      fs.readFileSync(config.filePath)
+    );
+
+    return {
+      success: true,
+      message: `${config.filePath} have been successfully installed to ${config.map.name}.`,
+    };
+  } catch (e) {
+    return { success: false, message: e.message };
+  }
+};
+
 export const runInstalledMap = (map: string, heroesPath: string): Object => {
   const mapObj = mapConfig.heroes.mapsPath[map];
 

@@ -20,11 +20,17 @@ contextBridge.exposeInMainWorld('electron', {
     runMap(settings: Object) {
       ipcRenderer.send('run-map', settings);
     },
+    installMapFromFile(settings: Object) {
+      ipcRenderer.send('install-map-from-file', settings);
+    },
     openFolder(path: string) {
       ipcRenderer.send('open-folder', path);
     },
     deleteInstalledMap(map: string) {
       ipcRenderer.send('delete-installed-map', map);
+    },
+    openInstalledMap(map: string) {
+      ipcRenderer.send('open-installed-map', map);
     },
     runInstalledMap(map: string) {
       ipcRenderer.send('run-installed-map', map);

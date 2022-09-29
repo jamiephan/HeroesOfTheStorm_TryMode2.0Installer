@@ -6,6 +6,8 @@ export default function AlertDialog() {
   const { state, dispatch } = useContext(GlobalContext);
 
   const handleClose = () => dispatch({ type: 'HIDE_DIALOG' });
+  const handleCancel = () =>
+    dispatch({ type: 'HIDE_DIALOG', noCallback: true });
   return (
     <>
       <Modal show={state?.dialog?.show} onHide={handleClose} centered>
@@ -16,9 +18,20 @@ export default function AlertDialog() {
           {state?.dialog?.message}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Close
-          </Button>
+          {state?.dialog?.withYesNo ? (
+            <>
+              <Button variant="primary" onClick={handleClose}>
+                OK
+              </Button>
+              <Button variant="primary" onClick={handleCancel}>
+                Cancel
+              </Button>
+            </>
+          ) : (
+            <Button variant="primary" onClick={handleClose}>
+              Close
+            </Button>
+          )}
         </Modal.Footer>
       </Modal>
       <Modal show={state?.isInstallingMap} centered>

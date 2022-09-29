@@ -23,6 +23,7 @@ import {
   installOnlineMap,
   runOnlineMap,
   runInstalledMap,
+  installMapFromFile,
 } from './util';
 
 export default class AppUpdater {
@@ -216,6 +217,19 @@ ipcMain.on('delete-installed-map', async (event, map) => {
   event.reply('get-settings', await settings.get());
 });
 
+ipcMain.on('open-installed-map', async (event, map) => {
+  await validateSettings();
+  const heroesPath = await settings.get('heroesPath');
+
+  // Open the map
+  try {
+    const mapPath = `${heroesPath}/${config.heroes.mapsPath[map].path}/${config.heroes.mapsPath[map].file}`;
+    shell.showItemInFolder(path.normalize(mapPath));
+  } catch (e) {
+    event.reply('electron-ipc-error', e.message);
+  }
+});
+
 ipcMain.on('run-installed-map', async (event, map) => {
   // Run the map
   const heroesPath = await settings.get('heroesPath');
@@ -298,6 +312,21 @@ ipcMain.on('run-map', async (event, config) => {
   }
 });
 
+ipcMain.on('install-map-from-file', async (event, config) => {
+  const heroesPath = await settings.get('heroesPath');
+
+  const result = await installMapFromFile(config, heroesPath);
+
+  await validateSettings();
+  event.reply('get-settings', await settings.get());
+
+  if (result.success) {
+    event.reply('electron-ipc-success', result.message);
+  } else {
+    event.reply('electron-ipc-error', result.message);
+  }
+});
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
@@ -333,10 +362,14 @@ const createWindow = async () => {
   const defaultSettings = {
     appName: 'Try Mode 2.0 Installer',
     heroesPath: await getHeroesPath(),
+    showStormMapGenerator: false,
+    showMoreSettings: false,
     skipHeroesPathCheck: false,
+    showStormMapGeneratorDescription: true,
+    showMapInstallDescription: true,
+    showConfirmDeletedMap: true,
     installedMaps: [],
     activeStormmapGeneratorWindow: [],
-    showStormMapGenerator: false,
     platform: process.platform,
     mapFilterText: '',
   };
